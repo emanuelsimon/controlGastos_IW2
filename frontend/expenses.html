@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/expenses.css">
+    <title>CtrlGasto - Gastos</title>
+</head>
+
+<body>
+    <header>
+        <h1>CtrlGasto - Gastos</h1>
+    </header>
+
+    <button type="button" id="inicio-btn">Volver al inicio</button>
+
+    <div class="card">
+        <h1>Visualización de Gastos</h1>
+        <div id="expenses-container">
+            <div class="filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Por mes</button>
+                <button class="filter-btn">Categoría</button>
+                <button class="filter-btn">Comercio</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Comercio</th>
+                        <th>Categoría</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+
+                    </tr>
+                </thead>
+                <tbody id="expenses-table-body">
+                    <tr>
+                        <td>Supermercado Día</td>
+                        <td>Alimentación</td>
+                        <td>15/03/2026</td>
+                        <td>$2500</td>
+                    </tr>
+                    <tr>
+                        <td>Estacion YPF</td>
+                        <td>Combustible</td>
+                        <td>16/03/2026</td>
+                        <td>$78000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="js/expenses.js"></script>
+</body>
+
+</html>

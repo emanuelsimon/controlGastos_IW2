@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <title>CtrlGasto - Dashboard</title>
+</head>
+
+<body>
+    <header>
+        <h1>CtrlGasto - Dashboard</h1>
+        <p>Bienvenido, <span id="user-name"></span></p>
+    </header>
+
+    <button type="button" id="logout-btn">Cerrar sesión</button>
+    <main>
+        <div class="cards-container">
+            <div class="card-option" onclick="window.location.href='expenses.html'"><span class="card-icon">📊</span>
+                <h2>Ver Gastos</h2>
+                <p>Visualizá tu historial de gastos</p>
+            </div>
+            <div class="card-option" onclick="window.location.href='upload.html'"><span class="card-icon">📤</span>
+                <h2>Subir Gastos</h2>
+                <p>Sube tus gastos recientes</p>
+            </div>
+            <div class="card-option" onclick="window.location.href='reports.html'"><span class="card-icon">📈</span>
+                <h2>Generar Reportes</h2>
+                <p>Analizá tus gastos con reportes personalizados</p>
+            </div>
+        </div>
+    </main>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
