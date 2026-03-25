@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/upload.css">
+    <title>CtrlGasto - Subir Gastos</title>
+</head>
+
+<body>
+    <header>
+        <h1>CtrlGasto - Subir Gastos</h1>
+        <button type="button" id="inicio-btn">← Volver</button>
+    </header>
+
+    <div class="cards-container">
+        <div class="card">
+            <!-- Zona de subida de imagen -->
+            <div id="upload-zone">
+                <p>📷 Subí una foto de tu ticket</p>
+                <input type="file" id="ticket-image" accept="image/*">
+                <button type="button" id="procesar-btn">Procesar con IA</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <!-- Formulario pre-completado por la IA -->
+            <h2>Datos del gasto</h2>
+            <form id="expense-form">
+                <label for="Fecha">Fecha:</label>
+                <input type="date" id="fecha">
+                <label for="Categoria">Categoría:</label>
+                <input type="text" id="categoria" placeholder="Categoría del gasto">
+                <label for="Comercio">Comercio:</label>
+                <input type="text" id="comercio" placeholder="Nombre del comercio">
+                <label for="Monto">Monto:</label>
+                <input type="number" id="monto" placeholder="Monto del gasto">
+                <label for="Descripcion">Descripción:</label>
+                <input type="text" id="descripcion" placeholder="Descripción del gasto">
+                <button type="submit" id="guardar-btn">Guardar Gasto</button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <script src="js/upload.js"></script>
+</body>
+
+</html>
