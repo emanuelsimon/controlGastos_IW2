@@ -12,11 +12,12 @@ document.getElementById("login-form").addEventListener("submit", async function(
      * ya tiene cargado api.js y puede usar sus funciones
      */
     const data = await loginUser(email, password)
-    console.log(data) // aquí puedes manejar la respuesta del backend, por ejemplo, guardando el token en localStorage
+    console.log(data) // aquí puedes manejar la respuesta del backend, por ejemplo, 
+    // guardando el token en localStorage
     
     if (data.token) {
         localStorage.setItem("token", data.token)
-        //Convertimos el objeto javascript a un string JSONpara guardarlo en localStorage
+        //Convertimos el objeto javascript a un string JSON para guardarlo en localStorage
         localStorage.setItem("user", JSON.stringify(data.user))
         window.location.href = "dashboard.html"
     } else {

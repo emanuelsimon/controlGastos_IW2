@@ -30,3 +30,17 @@ async function loginUser(email, password) {
         }
     }
 }
+
+async function procesarTicket(base64Image) {
+    const response = await fetch(`${API_URL}/tickets/upload`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({ image: base64Image })
+    })
+
+    const data = await response.json()
+    return data
+}

@@ -1,11 +1,7 @@
 /* expenses.js - Lógica para la página de visualización de gastos */
 
-/* Verificar si el usuario tiene un token válido en localStorage, sino lo redirigimos al login */
-let token = localStorage.getItem("token")
-if (!token) {
-    window.location.href = "index.html"
-}
-
+// Verificar que el usuario esté autenticado al cargar la página
+verificarToken()
 
 document.getElementById("inicio-btn").addEventListener("click", function() {
     window.location.href = "dashboard.html"

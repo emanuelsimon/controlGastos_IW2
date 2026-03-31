@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/users.css">
+    <title>CtrlGasto - Usuarios</title>
+</head>
+
+<body>
+    <header>
+        <h1>CtrlGasto - Usuarios</h1>
+        <button type="button" id="inicio-btn">← Volver</button>
+    </header>
+
+    <div class="card">
+        <div id="expenses-container">
+            <div class="filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Por Apellido</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dni</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="expenses-table-body">
+                    <tr>
+                        <td>12345678</td>
+                        <td>Juan</td>
+                        <td>Pérez</td>
+                        <td>juan.perez@email.com</td>
+                        <td><button onclick="window.location.href='user-detail.html?id=1'">Ver gastos</button></td>
+                    </tr>
+                    <tr>
+                        <td>87654321</td>
+                        <td>María</td>
+                        <td>Gómez</td>
+                        <td>maria.gomez@email.com</td>
+                        <td><button onclick="window.location.href='user-detail.html?id=2'">Ver gastos</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../js/utils.js"></script>
+    <script src="../js/users.js"></script>
+</body>
+
+</html>
