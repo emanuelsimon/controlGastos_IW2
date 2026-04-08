@@ -4,23 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
     <title>CtrlGasto - Iniciar sesión</title>
 </head>
 <body>
-    <div class="card">
-        <h1>Iniciar Sesión</h1>
-    <form id="login-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Tu email">
+    <div class="cg-wrap">
+        <div class="cg-card">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
 
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" placeholder="Tu contraseña">
-        
-        <button type="submit">Iniciar sesión</button>
-    </form>
-    <p>¿No tenés cuenta? <a href="register.html">Registrate</a></p>
+            <h1>Bienvenido</h1>
+            <p class="cg-subtitle">Iniciá sesión para continuar</p>
+
+            <form id="login-form">
+                <div class="cg-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="tu@email.com">
+                </div>
+
+                <div class="cg-field">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" placeholder="Tu contraseña">
+                </div>
+
+                <a href="#" class="cg-forgot">¿Olvidaste tu contraseña?</a>
+
+                <button type="submit" class="cg-btn">Iniciar sesión</button>
+            </form>
+
+            <p class="cg-footer">¿No tenés cuenta? <a href="register.html">Registrate</a></p>
+        </div>
     </div>
+
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
 </body>
