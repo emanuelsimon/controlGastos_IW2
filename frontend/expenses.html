@@ -11,33 +11,43 @@
 
 <body>
     <header>
-        <h1>CtrlGasto - Gastos</h1>
-        <button type="button" id="inicio-btn">← Volver</button>
+        <div class="cg-logo">
+            <div class="cg-logo-icon">$</div>
+            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+        </div>
+
+        <button id="inicio-btn">← Volver</button>
     </header>
 
-    <div class="card">
-        <div id="expenses-container">
-            <div class="filters">
-                <button class="filter-btn active">Todos</button>
-                <button class="filter-btn">Por mes</button>
-                <button class="filter-btn">Categoría</button>
-                <button class="filter-btn">Comercio</button>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Comercio</th>
-                        <th>Categoría</th>
-                        <th>Fecha</th>
-                        <th>Monto</th>
+    <main class="cg-wrap" style="align-items:flex-start; padding-top:3rem">
+        <div class="cg-card cg-card-wide">
+            <h1>Gastos</h1>
+            <p class="cg-subtitle">Historial completo de tus gastos</p>
 
-                    </tr>
-                </thead>
-                <tbody id="expenses-table-body">
-                </tbody>
-            </table>
+            <!-- Filtros -->
+            <div class="cg-filters">
+                <button class="cg-filter active">Todos</button>
+                <button class="cg-filter">Por mes</button>
+                <button class="cg-filter">Categoría</button>
+                <button class="cg-filter">Comercio</button>
+            </div>
+
+            <!-- Tabla -->
+            <div class="cg-table-wrapper">
+                <table class="cg-table">
+                    <thead>
+                        <tr>
+                            <th>Comercio</th>
+                            <th>Categoría</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody id="expenses-table-body"></tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    </main>
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/expenses.js"></script>
