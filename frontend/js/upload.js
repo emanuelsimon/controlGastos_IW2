@@ -3,10 +3,6 @@
 // Verificar que el usuario esté autenticado al cargar la página
 verificarToken()
 
-document.getElementById("inicio-btn").addEventListener("click", function () {
-  window.location.href = "dashboard.html";
-});
-
 document.getElementById("procesar-btn").addEventListener("click", function () {
   let fileInput = document.getElementById("ticket-image");
   let file = fileInput.files[0]; // Obtiene la el archivo seleccionado

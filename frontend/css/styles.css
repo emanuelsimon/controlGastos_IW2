@@ -248,3 +248,90 @@ h1 {
 .cg-footer a:hover {
     text-decoration: underline;
 }
+
+/* =====================
+   APP LAYOUT
+   ===================== */
+
+.cg-app {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.cg-sidebar {
+    width: 220px;
+    background: #0b1220;
+    border-right: 1px solid #2e3a52;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.cg-sidebar .cg-logo {
+    margin-bottom: 2rem;
+}
+
+/* NAV */
+.cg-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cg-nav-item {
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.cg-nav-item:hover {
+    background: #1a2236;
+    color: #fff;
+}
+
+.cg-nav-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+/* LOGOUT */
+.cg-logout {
+    margin-top: auto;
+    background: transparent;
+    border: 1px solid #2e3a52;
+    color: #94a3b8;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.cg-logout:hover {
+    background: #1a2236;
+}
+
+/* MAIN */
+.cg-main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* =====================
+   NOMBRE DEL USUARIO
+   ===================== */
+
+.cg-user {
+    margin-bottom: 2rem;
+    padding: 10px;
+    border-radius: 8px;
+    background: #1a2236;
+}
+
+.cg-user-name {
+    font-size: 14px;
+    color: #e2e8f0;
+    font-weight: 500;
+}

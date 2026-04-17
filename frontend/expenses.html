@@ -10,47 +10,63 @@
 </head>
 
 <body>
-    <header>
-        <div class="cg-logo">
-            <div class="cg-logo-icon">$</div>
-            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-        </div>
+    <div class="cg-app">
 
-        <button id="inicio-btn">← Volver</button>
-    </header>
+        <!-- SIDEBAR -->
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
 
-    <main class="cg-wrap" style="align-items:flex-start; padding-top:3rem">
-        <div class="cg-card cg-card-wide">
+            <!-- Nombre del Usuario -->
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Usuario</div>
+            </div>
+
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
+                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
+                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
+                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+            </nav>
+
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+
+        <main class="cg-main">
             <h1>Gastos</h1>
-            <p class="cg-subtitle">Historial completo de tus gastos</p>
+            <p class="cg-subtitle">Historial de movimientos</p>
 
-            <!-- Filtros -->
-            <div class="cg-filters">
-                <button class="cg-filter active">Todos</button>
-                <button class="cg-filter">Por mes</button>
-                <button class="cg-filter">Categoría</button>
-                <button class="cg-filter">Comercio</button>
-            </div>
+            <div class="cg-card cg-card-wide">
 
-            <!-- Tabla -->
-            <div class="cg-table-wrapper">
-                <table class="cg-table">
-                    <thead>
-                        <tr>
-                            <th>Comercio</th>
-                            <th>Categoría</th>
-                            <th>Fecha</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody id="expenses-table-body"></tbody>
-                </table>
+                <!-- Filtros -->
+                <div class="cg-filters">
+                    <button class="cg-filter active">Todos</button>
+                    <button class="cg-filter">Por mes</button>
+                    <button class="cg-filter">Categoría</button>
+                    <button class="cg-filter">Comercio</button>
+                </div>
+
+                <!-- Tabla -->
+                <div class="cg-table-wrapper">
+                    <table class="cg-table">
+                        <thead>
+                            <tr>
+                                <th>Comercio</th>
+                                <th>Categoría</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenses-table-body"></tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </main>
-    <script src="js/utils.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/expenses.js"></script>
+        </main>
+        <script src="js/utils.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/expenses.js"></script>
 </body>
 
 </html>

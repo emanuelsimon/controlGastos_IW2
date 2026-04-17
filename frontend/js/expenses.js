@@ -3,11 +3,6 @@
 // Verificar que el usuario esté autenticado al cargar la página
 verificarToken()
 
-document.getElementById("inicio-btn").addEventListener("click", function() {
-    window.location.href = "dashboard.html"
-})
-
-
 
 let filterBtns = document.querySelectorAll(".filter-btn")
 /*Al cargar la pagina le agrega a cada boton la funcion "addEventListener" y si alguno recibe un click se ejecuta la funcion

@@ -12,38 +12,54 @@
     <title>CtrlGasto - Reportes</title>
 
 <body>
+    <div class="cg-app">
 
-    <header>
-        <div class="cg-logo">
-            <div class="cg-logo-icon">$</div>
-            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-        </div>
+        <!-- SIDEBAR -->
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
 
-        <button id="inicio-btn">← Volver</button>
-    </header>
-    <main class="cg-wrap">
-        <div class="cg-card cg-card-wide">
-            <h1>Reportes</h1>
-            <p class="cg-subtitle">Visualizá tus gastos de forma clara</p>
+            <!-- Nombre del Usuario -->
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Usuario</div>
+            </div>
 
-            <div class="cg-dashboard">
-                <div class="cg-chart-box">
-                    <h2>Gastos por Categoría</h2>
-                    <canvas id="grafico-categorias"></canvas>
-                </div>
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
+                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
+                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
+                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+            </nav>
 
-                <div class="cg-chart-box">
-                    <h2>Gastos por Mes</h2>
-                    <canvas id="grafico-meses"></canvas>
-                </div>
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
 
-                <div class="cg-chart-box">
-                    <h2>Comercios más frecuentes</h2>
-                    <canvas id="grafico-comercios"></canvas>
+        <main class="cg-main">
+            <h1>Gastos</h1>
+            <p class="cg-subtitle">Visualiza tu historial de gastos</p>
+
+            <div class="cg-card cg-card-wide">
+
+                <div class="cg-dashboard">
+                    <div class="cg-chart-box">
+                        <h2>Gastos por Categoría</h2>
+                        <canvas id="grafico-categorias"></canvas>
+                    </div>
+
+                    <div class="cg-chart-box">
+                        <h2>Gastos por Mes</h2>
+                        <canvas id="grafico-meses"></canvas>
+                    </div>
+
+                    <div class="cg-chart-box">
+                        <h2>Comercios más frecuentes</h2>
+                        <canvas id="grafico-comercios"></canvas>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

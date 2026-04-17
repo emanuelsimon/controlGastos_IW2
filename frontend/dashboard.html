@@ -1,52 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dashboard.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap"
+        rel="stylesheet">
     <title>CtrlGasto - Dashboard</title>
 </head>
-<body>
-    <header>
-        <div class="cg-logo">
-            <div class="cg-logo-icon">$</div>
-            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-        </div>
-        <div style="display:flex; align-items:center; gap:1rem">
-            <span style="color:#94a3b8; font-size:14px">Hola, <span id="user-name"></span></span>
-            <button type="button" id="logout-btn">Cerrar sesión</button>
-        </div>
-    </header>
 
-    <main class="cg-wrap" style="align-items: flex-start; padding-top: 3rem">
-        <div class="cg-card cg-card-wide">
+<body>
+    <div class="cg-app">
+
+        <!-- SIDEBAR -->
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
+
+            <!-- Nombre del Usuario -->
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Usuario</div>
+            </div>
+
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
+                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
+                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
+                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+            </nav>
+
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+        <main class="cg-main">
             <h1>Panel principal</h1>
             <p class="cg-subtitle">¿Qué querés hacer hoy?</p>
+
             <div class="cards-container">
                 <div class="card-option" onclick="window.location.href='expenses.html'">
                     <span class="card-icon">📊</span>
                     <h2>Ver Gastos</h2>
-                    <p>Visualizá tu historial de gastos</p>
                 </div>
+
                 <div class="card-option" onclick="window.location.href='upload.html'">
                     <span class="card-icon">📤</span>
+
                     <h2>Subir Gastos</h2>
-                    <p>Subí tus gastos recientes</p>
                 </div>
+
+
                 <div class="card-option" onclick="window.location.href='reports.html'">
                     <span class="card-icon">📈</span>
-                    <h2>Generar Reportes</h2>
-                    <p>Analizá tus gastos con reportes</p>
+                    <h2>Reportes</h2>
                 </div>
             </div>
-        </div>
-    </main>
-
+        </main>
+    </div>
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/dashboard.js"></script>
+
 </body>
+
 </html>

@@ -3,10 +3,6 @@
 // Verificar que el usuario esté autenticado al cargar la página
 verificarToken();
 
-document.getElementById("inicio-btn").addEventListener("click", function () {
-  window.location.href = "dashboard.html";
-});
-
 async function cargarReportes() {
   const data = await getReportsData();
 

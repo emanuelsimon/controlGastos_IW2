@@ -10,19 +10,33 @@
 </head>
 
 <body>
-    <header>
-        <div class="cg-logo">
-            <div class="cg-logo-icon">$</div>
-            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-        </div>
+    <div class="cg-app">
 
-        <button id="inicio-btn">← Volver</button>
-    </header>
+        <!-- SIDEBAR -->
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
 
-    <main class="cg-wrap" style="align-items:flex-start; padding-top:3rem">
-        <div class="cg-card cg-card-wide">
+            <!-- Nombre del Usuario -->
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Usuario</div>
+            </div>
+
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
+                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
+                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
+                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+            </nav>
+
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+
+        <main class="cg-main">
             <h1>Subir gasto</h1>
-            <p class="cg-subtitle">Cargá un gasto manualmente o desde un ticket</p>
+            <p class="cg-subtitle">Cargá tus gastos fácilmente</p>
 
             <div class="cg-dashboard">
 
@@ -72,7 +86,7 @@
                 </div>
 
             </div>
-        </div>
+    </div>
     </main>
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
