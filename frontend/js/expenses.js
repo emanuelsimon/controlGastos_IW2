@@ -22,3 +22,25 @@ filterBtns.forEach(function(btn) {
         btn.classList.add("active")
     })
 })
+
+
+async function cargarGastos() {
+    const expenses = await getExpenses()
+    const tbody = document.getElementById("expenses-table-body")
+    
+    tbody.innerHTML = ""
+    
+    expenses.forEach(function(expense) {
+        const fila = `
+            <tr>
+                <td>${expense.comercio}</td>
+                <td>${expense.categoria}</td>
+                <td>${expense.fecha}</td>
+                <td>$${expense.monto}</td>
+            </tr>
+        `
+        tbody.innerHTML += fila
+    })
+}
+
+cargarGastos()

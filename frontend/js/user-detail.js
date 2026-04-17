@@ -7,7 +7,7 @@ verificarRol("asesor")
 
 // Agrego el Listener para volver al inicio
 document.getElementById("inicio-btn").addEventListener("click", function() {
-    window.location.href = "dashboard.html"
+    window.location.href = "../dashboard.html"
 })
 
 let params = new URLSearchParams(window.location.search)
@@ -17,4 +17,24 @@ console.log(userId) // Verficamos que el ID se esté obteniendo correctamente
 //Harcodeamos el nombre del usuario por ahora, luego lo reemplazaremos por 
 // el nombre real obtenido de la API
 document.getElementById("user-name").textContent = "Juan Pérez"
+
+async function cargarDetalleUsuarios() {
+    const expenses = await getUserExpenses(userId)
+    const tbody = document.getElementById("expenses-table-body")
+    
+    tbody.innerHTML = ""
+    
+    users.forEach(function(user) {
+        const fila = `
+            <tr>
+                <td>${expense.comercio}</td>
+                <td>${expense.categoria}</td>
+                <td>${expense.fecha}</td>
+                <td>$${expense.monto}</td>
+            </tr>
+        `
+        tbody.innerHTML += fila
+    })
+}
+cargarDetalleUsuarios()
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>CtrlGasto - Panel de Asesor</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1>CtrlGasto</h1>
+            <p>Bienvenido, <span id="user-name"></span></p>
+        </div>
+        <button type="button" id="logout-btn">Cerrar sesión</button>
+    </header>
+
+    <main>
+        <div class="cards-container">
+            <div class="card-option" onclick="window.location.href='users.html'"><span class="card-icon">�</span>
+                <h2>Ver Usuarios</h2>
+                <p>Visualizá la lista de usuarios</p>
+            </div>
+        </div>
+    </main>
+    <script src="../js/utils.js"></script>
+    <script src="../js/advisor-dashboard.js"></script>
+</body>
+
+</html>

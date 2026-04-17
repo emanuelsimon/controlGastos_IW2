@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <title>CtrlGasto - Reportes</title>
+
+<body>
+
+    <header>
+        <div class="cg-logo">
+            <div class="cg-logo-icon">$</div>
+            <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+        </div>
+
+        <button id="inicio-btn">← Volver</button>
+    </header>
+    <main class="cg-wrap">
+        <div class="cg-card cg-card-wide">
+            <h1>Reportes</h1>
+            <p class="cg-subtitle">Visualizá tus gastos de forma clara</p>
+
+            <div class="cg-dashboard">
+                <div class="cg-chart-box">
+                    <h2>Gastos por Categoría</h2>
+                    <canvas id="grafico-categorias"></canvas>
+                </div>
+
+                <div class="cg-chart-box">
+                    <h2>Gastos por Mes</h2>
+                    <canvas id="grafico-meses"></canvas>
+                </div>
+
+                <div class="cg-chart-box">
+                    <h2>Comercios más frecuentes</h2>
+                    <canvas id="grafico-comercios"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/reports.js"></script>
+
+</html>
