@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +7,36 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>CtrlGasto - Panel de Asesor</title>
 </head>
-
 <body>
-    <header>
-        <div>
-            <h1>CtrlGasto</h1>
-            <p>Bienvenido, <span id="user-name"></span></p>
-        </div>
-        <button type="button" id="logout-btn">Cerrar sesión</button>
-    </header>
-
-    <main>
-        <div class="cards-container">
-            <div class="card-option" onclick="window.location.href='users.html'"><span class="card-icon">�</span>
-                <h2>Ver Usuarios</h2>
-                <p>Visualizá la lista de usuarios</p>
+    <div class="cg-app">
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
             </div>
-        </div>
-    </main>
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Asesor</div>
+            </div>
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
+                <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
+            </nav>
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+
+        <main class="cg-main">
+            <h1>Panel del Asesor</h1>
+            <p class="cg-subtitle">¿Qué querés hacer hoy?</p>
+            <div class="cards-container">
+                <div class="card-option" onclick="window.location.href='users.html'">
+                    <span class="card-icon">👥</span>
+                    <h2>Ver Usuarios</h2>
+                    <p>Visualizá la lista de usuarios registrados</p>
+                </div>
+            </div>
+        </main>
+    </div>
     <script src="../js/utils.js"></script>
     <script src="../js/advisor-dashboard.js"></script>
 </body>
-
 </html>

@@ -91,9 +91,9 @@ async function procesarTicket(base64Image) {
 // Simular obtener gastos del usuario logueado
 async function getExpenses() {
     return [
-        { id: 1, comercio: "Supermercado Día", categoria: "Alimentación", fecha: "15/03/2026", monto: 2500 },
-        { id: 2, comercio: "Estacion YPF", categoria: "Combustible", fecha: "16/03/2026", monto: 78000 },
-        { id: 3, comercio: "Farmacia", categoria: "Salud", fecha: "17/03/2026", monto: 3500 },
+        { id: 1, comercio: "Supermercado Día", categoria: "Alimentación", fecha: "2026-06-15", monto: 2500 },
+        { id: 2, comercio: "Estacion YPF", categoria: "Combustible", fecha: "2026-03-16", monto: 78000 },
+        { id: 3, comercio: "Farmacia", categoria: "Salud", fecha: "2026-02-17", monto: 3500 },
     ]
 }
 
