@@ -108,8 +108,8 @@ async function getUsers() {
 // Simular obtener gastos de un usuario específico (para el asesor)
 async function getUserExpenses(userId) {
     return [
-        { id: 1, comercio: "Supermercado Día", categoria: "Alimentación", fecha: "15/03/2026", monto: 2500 },
-        { id: 2, comercio: "Restaurante", categoria: "Ocio", fecha: "18/03/2026", monto: 5000 },
+        { id: 1, comercio: "Supermercado Día", categoria: "Alimentación", fecha: "2026-03-15", monto: 2500 },
+        { id: 2, comercio: "Restaurante", categoria: "Ocio", fecha: "2026-02-18", monto: 5000 },
     ]
 }
 

@@ -8,29 +8,31 @@ verificarRol("asesor")
 
 let params = new URLSearchParams(window.location.search)
 let userId = params.get("id")
-console.log(userId) // Verficamos que el ID se esté obteniendo correctamente
 
-//Harcodeamos el nombre del usuario por ahora, luego lo reemplazaremos por 
-// el nombre real obtenido de la API
-document.getElementById("user-name").textContent = "Juan Pérez"
+document.getElementById("logout-btn").addEventListener("click", function() {
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    window.location.href = "../index.html"
+})
 
-async function cargarDetalleUsuarios() {
-    const expenses = await getUserExpenses(userId)
-    const tbody = document.getElementById("expenses-table-body")
-    
-    tbody.innerHTML = ""
-    
-    users.forEach(function(user) {
-        const fila = `
-            <tr>
-                <td>${expense.comercio}</td>
-                <td>${expense.categoria}</td>
-                <td>${expense.fecha}</td>
-                <td>$${expense.monto}</td>
-            </tr>
-        `
-        tbody.innerHTML += fila
-    })
-}
-cargarDetalleUsuarios()
+inicializarTabla(
+    () => getUserExpenses(userId),
+    (expense) => `
+        <tr>
+            <td>${expense.comercio}</td>
+            <td>${expense.categoria}</td>
+            <td>${expense.fecha}</td>
+            <td>$${expense.monto}</td>
+        </tr>
+    `,
+    {   //Cambiamos el formato "yyyy-mm-dd" a "dd/mm/yyyy" para luego con new Date() poder ordenar 
+    // correctamente por fecha y hacer la resta en milisegundos con Date() para ordenar por mes.
+    //OJO! Al tener backend funcionando, procurar recibir las fechas en formato ISO 8601(yyyy-mm-dd) 
+    // para evitar problemas de parseo.
+        "Por mes": (d) => d.sort((a, b) => new Date(a.fecha) - new Date(b.fecha)),
+        //Con localeCompare comparamos alfabeticamente respetando tildes y el idioma español. 
+        "Categoría": (d) => d.sort((a, b) => a.categoria.localeCompare(b.categoria)),
+        "Comercio": (d) => d.sort((a, b) => a.comercio.localeCompare(b.comercio))
+    }
+)
 

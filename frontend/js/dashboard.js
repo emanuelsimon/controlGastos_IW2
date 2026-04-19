@@ -16,11 +16,3 @@ if (user.rol === "asesor") {
     // Redirigir al panel del asesor
     window.location.href = "advisor/dashboard.html"
 }
-
-//Funcion agregada al boton de logout, al hacer click se borra el token y el usuario del localStorage 
-//redirigiendo al usuario a la página de login (index.html).
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    window.location.href = "index.html"
-})
