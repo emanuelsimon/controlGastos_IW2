@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="../css/expenses.css">
     <title>CtrlGasto - Detalle de Usuario</title>
 </head>
+
 <body>
     <div class="cg-app">
         <aside class="cg-sidebar">
@@ -25,7 +27,7 @@
         </aside>
 
         <main class="cg-main">
-            <h1>Gastos de: <span id="user-name"></span></h1>
+            <h1>Gastos de: <span id="user-name-detail"></span></h1>
             <p class="cg-subtitle">Historial de movimientos del usuario</p>
 
             <div class="content-box">
@@ -49,10 +51,12 @@
                     </table>
                 </div>
             </div>
+            <div class="cg-pagination" id="pagination"></div>
         </main>
     </div>
     <script src="../js/utils.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/user-detail.js"></script>
 </body>
+
 </html>

@@ -6,12 +6,11 @@ verificarRol("asesor")
 inicializarTabla(
     getUsers,
     (user) => `
-        <tr>
+        <tr class="clickable-row" onclick="window.location.href='user-detail.html?id=${user.id}'">
             <td>${user.dni}</td>
             <td>${user.nombre}</td>
             <td>${user.apellido}</td>
             <td>${user.email}</td>
-            <td><button class="cg-filter" onclick="window.location.href='user-detail.html?id=${user.id}'">Ver gastos →</button></td>
         </tr>
     `,
     {

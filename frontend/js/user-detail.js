@@ -5,16 +5,21 @@ verificarToken()
 // Verificar que el usuario tenga el rol de asesor
 verificarRol("asesor")
 
-
+// 1. Primero obtenemos el id de la URL
 let params = new URLSearchParams(window.location.search)
 let userId = params.get("id")
 
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    window.location.href = "../index.html"
-})
+// 2. Con ese id buscamos el usuario y mostramos su nombre en el encabezado de la página.
+async function mostrarNombreUsuario() {
+    const user = await getUserById(userId)
+    if (user) {
+        document.getElementById("user-name-detail").textContent = `${user.nombre} ${user.apellido}`
+    }
+}
+mostrarNombreUsuario()
 
+// 3. Inicializamos la tabla con los gastos de ese usuario, usando la función getUserExpenses(userId) 
+// que simula obtener los gastos de un usuario específico.
 inicializarTabla(
     () => getUserExpenses(userId),
     (expense) => `
@@ -25,7 +30,8 @@ inicializarTabla(
             <td>$${expense.monto}</td>
         </tr>
     `,
-    {   //Cambiamos el formato "yyyy-mm-dd" a "dd/mm/yyyy" para luego con new Date() poder ordenar 
+    {   
+    //Cambiamos el formato "yyyy-mm-dd" a "dd/mm/yyyy" para luego con new Date() poder ordenar 
     // correctamente por fecha y hacer la resta en milisegundos con Date() para ordenar por mes.
     //OJO! Al tener backend funcionando, procurar recibir las fechas en formato ISO 8601(yyyy-mm-dd) 
     // para evitar problemas de parseo.

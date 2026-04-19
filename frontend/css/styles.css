@@ -241,6 +241,18 @@ h1 {
 }
 
 /* =====================
+   Filas de una tabla clickeables (usado en la tabla de usuarios para el asesor)
+   ===================== */
+
+.clickable-row {
+    cursor: pointer;
+}
+
+.clickable-row:hover {
+    background-color: #1e293b;
+}
+
+/* =====================
    FOOTER DEL CARD
    ===================== */
 .cg-footer {
@@ -345,4 +357,39 @@ h1 {
     font-size: 14px;
     color: #e2e8f0;
     font-weight: 500;
+}
+
+
+/* =====================
+  PAGINACIÓN (usado en expense.html y advisor/users.html y advisor/users_details.html)
+   ===================== */
+
+.cg-pagination {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.cg-page-btn {
+    background: #0f1623;
+    border: 0.5px solid #2e3a52;
+    color: #94a3b8;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.cg-page-btn:hover {
+    border-color: #2563eb;
+    color: #fff;
+}
+
+.cg-page-btn.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
 }
