@@ -3,6 +3,33 @@
 // Verificar que el usuario esté autenticado al cargar la página
 verificarToken()
 
+//Obtenemos y validamos que los campos estén completos y se llama a la función createExpense para guardar el gasto. 
+document.getElementById("expense-form").addEventListener("submit", async function(event) { //expense-form es el id del formulario en upload.html
+    event.preventDefault()
+
+    const comercio = document.getElementById("comercio").value
+    const fecha = document.getElementById("fecha").value
+    const monto = document.getElementById("monto").value
+    const categoria = document.getElementById("categoria").value
+    const descripcion = document.getElementById("descripcion").value
+
+    if (!comercio || !fecha || !monto || !categoria) {
+        alert("Por favor completá los campos obligatorios")
+        return
+    }
+
+    try {
+        await createExpense(comercio, fecha, monto, categoria, descripcion, null) 
+        alert("Gasto guardado correctamente")
+        window.location.href = "expenses.html"//redirige a la página de gastos después de guardar el nuevo gasto
+    } catch (error) {
+        alert("Error al guardar el gasto: " + error.message)
+    }
+})
+
+
+
+
 document.getElementById("procesar-btn").addEventListener("click", function () {
   let fileInput = document.getElementById("ticket-image");
   let file = fileInput.files[0]; // Obtiene la el archivo seleccionado

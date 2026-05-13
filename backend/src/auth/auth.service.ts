@@ -1,11 +1,9 @@
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
-import * as bcrypt from 'bcrypt';//Porque * as bcrypt? 
-// Porque bcrypt no tiene una exportación por defecto, sino que exporta varias funciones, 
-// por eso usamos el comodín * para importar todas las funciones de bcrypt y luego las usamos con el prefijo bcrypt. 
-// Por ejemplo, bcrypt.hash() para hashear una contraseña y bcrypt.compare() para comparar una contraseña con un hash.
+import * as bcrypt from 'bcrypt';
 
+//Esta función se encarga de manejar la lógica de autenticación, incluyendo el registro de nuevos usuarios y el inicio de sesión.
 @Injectable()
 export class AuthService {
   constructor(
@@ -13,17 +11,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // El método register primero verifica si el email ya está registrado, si es así, lanza una excepción de conflicto. 
+  // Luego, genera un hash de la contraseña utilizando bcrypt y crea un nuevo usuario en la base de datos. Finalmente, devuelve un mensaje de éxito.
   async register(nombre: string, apellido: string, dni: string, email: string, password: string, rol: string) {
     const existingUser = await this.usersService.findByEmail(email);
     if (existingUser) {
       throw new ConflictException('El email ya está registrado');
     }
 
-    //bcrypt.hash(password, 10) genera un hash de la contraseña utilizando el algoritmo bcrypt, 
-    // con una sal de 10 rondas. Esto significa que el proceso de hash se repetirá 10 veces, 
-    // lo que hace que el hash sea más seguro pero también más lento de generar. Seguro contra 
-    // ataques de fuerza bruta, ya que aumenta el tiempo necesario para generar cada hash, lo que 
-    // dificulta a los atacantes probar muchas contraseñas en un corto período de tiempo.
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await this.usersService.create({
       nombre, apellido, dni, email,
@@ -49,6 +44,7 @@ export class AuthService {
     return {
       token: this.jwtService.sign(payload),
       user: {
+        id: user.id,
         name: user.nombre,
         email: user.email,
         rol: user.rol,

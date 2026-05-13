@@ -9,7 +9,7 @@ inicializarTabla(
         <tr>
             <td>${expense.comercio}</td>
             <td>${expense.categoria}</td>
-            <td>${expense.fecha}</td>
+            <td>${new Date(expense.fecha).toLocaleDateString('es-AR')}</td>
             <td>$${expense.monto}</td>
         </tr>
     `,
