@@ -17,7 +17,7 @@ export class Expense {
     @Column()
     monto!: number;
 
-    @Column({ default: 'categoria' })
+    @Column()
     categoria!: string;
 
     @Column({ nullable: true })
@@ -26,9 +26,6 @@ export class Expense {
     @Column({ nullable: true })
     imagen!: string;
 
-    @Column({ default: 'usuario' })
-    user!: string;
-
-    @ManyToOne(() => User, user => user.)
-    userEntity!: User;
+    @ManyToOne(() => User, user => user.expenses)
+    user!: User;
 }

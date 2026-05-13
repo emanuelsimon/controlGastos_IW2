@@ -27,7 +27,7 @@ export class ExpensesService {
   // Obtener todos los gastos de un usuario específico con paginado
  async findByUser(userId: number, page: number = 1, limit: number = 15): Promise<{ data: Expense[], total: number }> {
     const [data, total] = await this.expensesRepository.findAndCount({
-        where: { user: { id: userId } },
+        where: { user: { id: userId } as any },
         order: { fecha: 'DESC' },
         skip: (page - 1) * limit,
         take: limit,

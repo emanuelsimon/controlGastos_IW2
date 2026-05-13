@@ -68,10 +68,26 @@ async function getExpenses(page = 1) {
     return data.data
 }
 
-async function getUserById(id) {
-    const users = await getUsers()
-    return users.find(u => u.id === parseInt(id))
+
+async function getUsers(page = 1) {
+    const response = await fetch(`${API_URL}/users?page=${page}`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    const data = await response.json()
+    return data.data
 }
+
+async function getUserById(id) {
+    const response = await fetch(`${API_URL}/users/${id}`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return response.json()
+}
+
 
 //Obtenemos los gastos del usuario logueado, pasando el userId como parámetro en la URL.
 async function getUserExpenses(userId, page = 1) {

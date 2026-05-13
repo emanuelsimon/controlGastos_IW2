@@ -27,5 +27,5 @@ export class User {
   rol!: string;
 
   @OneToMany(() => Expense, expense => expense.user)
-  expense!: Expense;
+  expenses!: Expense;
 }
