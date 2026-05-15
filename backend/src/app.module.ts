@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { AuthModule } from './auth/auth.module';
+import { TicketsModule } from './tickets/tickets.module';
 
 @Module({
   //Dentro del decorador @Module le decimos a NestJS cuales modulos son parte de la aplicación
@@ -36,6 +37,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     ExpensesModule,
     AuthModule,
+    TicketsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

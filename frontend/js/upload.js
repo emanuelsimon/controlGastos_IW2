@@ -4,7 +4,7 @@
 verificarToken()
 
 //Obtenemos y validamos que los campos estén completos y se llama a la función createExpense para guardar el gasto. 
-document.getElementById("expense-form").addEventListener("submit", async function(event) { //expense-form es el id del formulario en upload.html
+document.getElementById("expense-form").addEventListener("submit", async function (event) { //expense-form es el id del formulario en upload.html
     event.preventDefault()
 
     const comercio = document.getElementById("comercio").value
@@ -19,7 +19,7 @@ document.getElementById("expense-form").addEventListener("submit", async functio
     }
 
     try {
-        await createExpense(comercio, fecha, monto, categoria, descripcion, null) 
+        await createExpense(comercio, fecha, monto, categoria, descripcion, null)
         alert("Gasto guardado correctamente")
         window.location.href = "expenses.html"//redirige a la página de gastos después de guardar el nuevo gasto
     } catch (error) {
@@ -31,25 +31,43 @@ document.getElementById("expense-form").addEventListener("submit", async functio
 
 
 document.getElementById("procesar-btn").addEventListener("click", function () {
-  let fileInput = document.getElementById("ticket-image");
-  let file = fileInput.files[0]; // Obtiene la el archivo seleccionado
+    let fileInput = document.getElementById("ticket-image");
+    let file = fileInput.files[0]; // Obtiene la el archivo seleccionado
 
-  if (!file) {
-    // Controlamos que el usuario haya seleccionado un archivo luego de apretar el botón
-    alert("Por favor seleccioná una imagen");
-    return;
-  }
+    if (!file) {
+        // Controlamos que el usuario haya seleccionado un archivo luego de apretar el botón
+        alert("Por favor seleccioná una imagen");
+        return;
+    }
 
-  let reader = new FileReader();
-  reader.readAsDataURL(file); // empieza a leer el archivo y cuando termina,
-  // se ejecutará el evento "onload" que definimos abajo. El resultado será la imagen en base64.
+    let reader = new FileReader();
+    reader.readAsDataURL(file); // empieza a leer el archivo y cuando termina,
+    // se ejecutará el evento "onload" que definimos abajo. El resultado será la imagen en base64.
 
-  reader.onload = async function () {
-    let base64 = reader.result; // acá está la imagen en base64
-    
-    let data = await procesarTicket(base64)
-    console.log(data)
-  };
+    reader.onload = async function () {
+        let base64 = reader.result
+
+        // Mostrar estado de carga
+        const btn = document.getElementById("procesar-btn")
+        btn.textContent = "⏳ Procesando..."
+        btn.disabled = true
+
+        try {
+            const resultado = await procesarTicket(base64)
+
+            if (resultado.comercio) document.getElementById("comercio").value = resultado.comercio
+            if (resultado.monto) document.getElementById("monto").value = resultado.monto
+            if (resultado.fecha) document.getElementById("fecha").value = resultado.fecha
+            if (resultado.categoria) document.getElementById("categoria").value = resultado.categoria
+
+        } catch (error) {
+            alert("Error al procesar el ticket: " + error.message)
+        } finally {
+            // Restaurar botón siempre, haya error o no
+            btn.textContent = "✨ Procesar con IA"
+            btn.disabled = false
+        }
+    };
 });
 
 const dropzone = document.getElementById("dropzone")
@@ -57,27 +75,27 @@ const fileInput = document.getElementById("ticket-image")
 const preview = document.getElementById("preview-img")
 
 // Click para abrir el selector de archivos
-dropzone.addEventListener("click", function() {
+dropzone.addEventListener("click", function () {
     fileInput.click()
 })
 
 // Cuando se selecciona un archivo
-fileInput.addEventListener("change", function() {
+fileInput.addEventListener("change", function () {
     mostrarPreview(fileInput.files[0])
 })
 
 // Drag over
-dropzone.addEventListener("dragover", function(e) {
+dropzone.addEventListener("dragover", function (e) {
     e.preventDefault()
     dropzone.classList.add("dragover")
 })
 
-dropzone.addEventListener("dragleave", function() {
+dropzone.addEventListener("dragleave", function () {
     dropzone.classList.remove("dragover")
 })
 
 // Drop
-dropzone.addEventListener("drop", function(e) {
+dropzone.addEventListener("drop", function (e) {
     e.preventDefault()
     dropzone.classList.remove("dragover")
     const file = e.dataTransfer.files[0]
@@ -86,7 +104,7 @@ dropzone.addEventListener("drop", function(e) {
 
 function mostrarPreview(file) {
     const reader = new FileReader()
-    reader.onload = function() {
+    reader.onload = function () {
         preview.src = reader.result
         preview.style.display = "block"
     }
