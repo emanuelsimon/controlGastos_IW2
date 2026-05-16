@@ -9,7 +9,7 @@ document.getElementById("expense-form").addEventListener("submit", async functio
 
     const comercio = document.getElementById("comercio").value
     const fecha = document.getElementById("fecha").value
-    const monto = document.getElementById("monto").value
+    const monto = parseFloat(document.getElementById("monto").value.replace(',', '.'))
     const categoria = document.getElementById("categoria").value
     const descripcion = document.getElementById("descripcion").value
 

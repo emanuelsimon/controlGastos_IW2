@@ -14,7 +14,7 @@ export class Expense {
     @Column()
     fecha!: Date;
 
-    @Column()
+    @Column('decimal', { precision: 10, scale: 2 })
     monto!: number;
 
     @Column()

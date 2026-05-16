@@ -43,29 +43,29 @@ export class TicketsService {
     }
 
     private extraerMonto(texto: string): number | null {
-        // Busca el último monto grande antes de TOTAL
+        // Primero busca TOTAL seguido directamente de un número
+        const patronTotal = /TOTAL\s+([\d.,]+)/i
+        const matchTotal = texto.match(patronTotal)
+        if (matchTotal) {
+            const valor = matchTotal[1]
+            if (/\.\d{2}$/.test(valor)) {
+                return parseFloat(valor)
+            }
+            return parseFloat(valor.replace(/\./g, '').replace(',', '.'))
+        }
+
+        // Fallback: último número grande antes de TOTAL
         const indexTotal = texto.toUpperCase().indexOf('TOTAL')
         if (indexTotal > 0) {
             const textoAntesTotal = texto.substring(0, indexTotal)
             const numeros = textoAntesTotal.match(/\d{4,}[.,]\d{2}/g)
             if (numeros && numeros.length > 0) {
-                // Toma el último número grande antes de TOTAL
                 const ultimo = numeros[numeros.length - 1]
-                // Si tiene punto seguido de exactamente 2 dígitos al final, es decimal
                 if (/\.\d{2}$/.test(ultimo)) {
                     return parseFloat(ultimo)
-                } else {
-                    return parseFloat(ultimo.replace(/\./g, '').replace(',', '.'))
                 }
+                return parseFloat(ultimo.replace(/\./g, '').replace(',', '.'))
             }
-        }
-
-        // Fallback: el número más grande del ticket
-        const numeros = texto.match(/\d{4,}[.,]\d{2}/g)
-        if (numeros) {
-            return Math.max(...numeros.map(n =>
-                parseFloat(n.replace(/\./g, '').replace(',', '.'))
-            ))
         }
         return null
     }
@@ -94,21 +94,19 @@ export class TicketsService {
     }
 
     private extraerComercio(texto: string): string | null {
-        // Busca líneas que contengan S.R.L, S.A, SA, SRL como indicadores de razón social
-        const patronComercio = /([A-Z\s]+(?:S\.R\.L|S\.A\.|SRL|SA|S\.A))/i
-        const match = texto.match(patronComercio)
-        if (match) {
-            return match[1].trim()
-        }
+        const lineas = texto.split(/[\t\n\r]/)
+            .map(l => l.trim())
+            .filter(l => l.length > 4 && !/^\d/.test(l) && !/CUIT|IVA|Fecha|Hora|Caja|Oper/i.test(l))
 
-        // Busca líneas con solo mayúsculas de más de 5 caracteres
-        const lineas = texto.split('\n')
-        for (const linea of lineas) {
-            const limpia = linea.trim()
-            if (limpia.length > 5 && /^[A-ZÁÉÍÓÚ\s]+$/.test(limpia)) {
-                return limpia
-            }
-        }
-        return null
+        // Priorizar líneas con razón social
+        const conRazonSocial = lineas.find(l => /S\.R\.L|S\.A\.|SRL|SA\b/i.test(l))
+        if (conRazonSocial) return conRazonSocial
+
+        // Priorizar líneas con "de" indicando nombre de persona
+        const conNombre = lineas.find(l => /\bde\b/i.test(l) && l.length > 8)
+        if (conNombre) return conNombre
+
+        // Primera línea con texto significativo
+        return lineas[0] || null
     }
 }
