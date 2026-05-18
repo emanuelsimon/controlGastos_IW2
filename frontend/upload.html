@@ -62,21 +62,33 @@
                         <form id="expense-form">
                             <div class="cg-row">
                                 <div class="cg-field">
-                                    <label>Fecha</label>
+                                    <label>Fecha <span style="color: #e74c3c">*</span></label>
                                     <input type="date" id="fecha">
                                 </div>
                                 <div class="cg-field">
-                                    <label>Monto</label>
+                                    <label>Monto <span style="color: #e74c3c">*</span></label>
                                     <input type="text" id="monto" placeholder="$0.00">
                                 </div>
                             </div>
                             <div class="cg-field">
-                                <label>Comercio</label>
+                                <label>Comercio <span style="color: #e74c3c">*</span></label>
                                 <input type="text" id="comercio" placeholder="Nombre del comercio">
                             </div>
                             <div class="cg-field">
-                                <label>Categoría</label>
-                                <input type="text" id="categoria" placeholder="Ej: Alimentación">
+                                <label>Categoría <span style="color: #e74c3c">*</span></label>
+                                <select id="categoria">
+                                    <option value="">-- Seleccioná una categoría --</option>
+                                    <option value="Alimentación">Alimentación</option>
+                                    <option value="Combustible">Combustible</option>
+                                    <option value="Salud">Salud</option>
+                                    <option value="Ocio">Ocio</option>
+                                    <option value="Transporte">Transporte</option>
+                                    <option value="Educación">Educación</option>
+                                    <option value="Hogar">Hogar</option>
+                                    <option value="Ropa">Ropa</option>
+                                    <option value="Servicios">Servicios</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
                             </div>
                             <div class="cg-field">
                                 <label>Descripción</label>

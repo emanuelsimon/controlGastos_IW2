@@ -11,6 +11,9 @@ inicializarTabla(
             <td>${expense.categoria}</td>
             <td>${new Date(expense.fecha).toLocaleDateString('es-AR')}</td>
             <td>$${expense.monto}</td>
+            <td>
+                <button class="cg-filter" onclick="eliminarGasto(${expense.id})">🗑 Eliminar</button>
+            </td>
         </tr>
     `,
     {
@@ -19,3 +22,14 @@ inicializarTabla(
         "Comercio": (d) => d.sort((a, b) => a.comercio.localeCompare(b.comercio))
     }
 )
+
+async function eliminarGasto(id) {
+    if (!confirm("¿Seguro que querés eliminar este gasto?")) return
+    
+    try {
+        await deleteExpense(id)
+        location.reload()
+    } catch (error) {
+        alert("Error al eliminar: " + error.message)
+    }
+}

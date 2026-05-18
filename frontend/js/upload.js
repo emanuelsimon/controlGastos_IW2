@@ -58,7 +58,13 @@ document.getElementById("procesar-btn").addEventListener("click", function () {
             if (resultado.comercio) document.getElementById("comercio").value = resultado.comercio
             if (resultado.monto) document.getElementById("monto").value = resultado.monto
             if (resultado.fecha) document.getElementById("fecha").value = resultado.fecha
-            if (resultado.categoria) document.getElementById("categoria").value = resultado.categoria
+            if (resultado.categoria) {
+                const select = document.getElementById("categoria")
+                const opcion = Array.from(select.options).find(o => o.value === resultado.categoria)
+                if (opcion) {
+                    select.value = resultado.categoria
+                }
+            }
 
         } catch (error) {
             alert("Error al procesar el ticket: " + error.message)

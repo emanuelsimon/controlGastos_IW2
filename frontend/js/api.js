@@ -102,20 +102,16 @@ async function getUserExpenses(userId, page = 1) {
 
 
 async function getReportsData() {
-    return {
-        categorias: {
-            labels: ["Alimentación", "Combustible", "Salud", "Ocio", "Transporte", "Suscripciones", "Hogar", "Mascotas", "Servicios", "Ropa", "Cultura"],
-            datos: [45000, 78000, 3500, 5000]
-        },
-        meses: {
-            labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-            datos: [50000, 95000, 131500]
-        },
-        comercios: {
-            labels: ["YPF", "Supermercado Día", "Farmacia", "Restaurante El Faro"],
-            datos: [78000, 45000, 3500, 5000]
-        }
-    }
+    const user = JSON.parse(localStorage.getItem("user"))
+    const headers = { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+
+    const [categorias, meses, comercios] = await Promise.all([
+        fetch(`${API_URL}/expenses/reportes/categorias?userId=${user.id}`, { headers }).then(r => r.json()),
+        fetch(`${API_URL}/expenses/reportes/meses?userId=${user.id}`, { headers }).then(r => r.json()),
+        fetch(`${API_URL}/expenses/reportes/comercios?userId=${user.id}`, { headers }).then(r => r.json()),
+    ])
+
+    return { categorias, meses, comercios }
 }
 
 //Función para crear un nuevo gasto, enviando los datos al backend a través de una solicitud POST a la ruta /expenses.
@@ -143,5 +139,19 @@ async function createExpense(comercio, fecha, monto, categoria, descripcion, ima
         throw new Error(error.message)
     }
 
+    return response.json()
+}
+
+async function deleteExpense(id) {
+    const response = await fetch(`${API_URL}/expenses/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message)
+    }
     return response.json()
 }

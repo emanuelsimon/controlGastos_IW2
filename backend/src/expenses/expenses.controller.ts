@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Query, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, Put, Delete } from '@nestjs/common';
 import { ExpensesService } from './expenses.service';
+import { Expense } from './expense.entity';
 
 @Controller('expenses')
 export class ExpensesController {
-  constructor(private expensesService: ExpensesService) {}
+  constructor(private expensesService: ExpensesService) { }
 
   // GET /expenses?page=1 → gastos del usuario logueado
   @Get()
@@ -40,5 +41,31 @@ export class ExpensesController {
       imagen: body.imagen,
       user: { id: body.userId } as any
     })
+  }
+
+  @Get('reportes/categorias')
+  async getReportesCategorias(@Query('userId') userId: number) {
+    return this.expensesService.getReportesCategorias(userId)
+  }
+
+  @Get('reportes/meses')
+  async getReportesMeses(@Query('userId') userId: number) {
+    return this.expensesService.getReportesMeses(userId)
+  }
+
+  @Get('reportes/comercios')
+  async getReportesComercios(@Query('userId') userId: number) {
+    return this.expensesService.getReportesComercios(userId)
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() body: Partial<Expense>) {
+    return this.expensesService.update(id, body)
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: number) {
+    await this.expensesService.remove(id)
+    return { message: 'Gasto eliminado correctamente' }
   }
 }
