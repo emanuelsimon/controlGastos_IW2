@@ -99,7 +99,11 @@ export class ExpensesService {
 
   async update(id: number, expenseData: Partial<Expense>): Promise<Expense> {
     await this.expensesRepository.update(id, expenseData)
-    return this.expensesRepository.findOne({ where: { id } }) as Promise<Expense>
+    return this.expensesRepository.findOne({ where: { id }, relations: ['user'] }) as Promise<Expense>
+  }
+
+  async findById(id: number): Promise<Expense> {
+    return this.expensesRepository.findOne({ where: { id }, relations: ['user'] }) as Promise<Expense>
   }
 
   async remove(id: number): Promise<void> {
