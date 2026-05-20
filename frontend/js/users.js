@@ -14,7 +14,6 @@ inicializarTabla(
             <td>${user.email}</td>
             <td>
                 <button class="cg-filter" onclick="window.location.href='user-detail.html?id=${user.id}'">Ver gastos →</button>
-                //Se pasa el userId y el nombre completo del usuario como parámetros en la URL.
                 <button class="cg-filter" onclick="window.location.href='send-recommendation.html?userId=${user.id}&nombre=${encodeURIComponent(user.nombre + ' ' + user.apellido)}'">💡 Recomendar</button>
             </td>
         </tr>
