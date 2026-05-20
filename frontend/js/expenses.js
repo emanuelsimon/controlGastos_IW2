@@ -12,7 +12,8 @@ inicializarTabla(
             <td>${new Date(expense.fecha).toLocaleDateString('es-AR')}</td>
             <td>$${expense.monto}</td>
             <td>
-                <button class="cg-filter" onclick="eliminarGasto(${expense.id})">🗑 Eliminar</button>
+                <button class="cg-filter" onclick="eliminarGasto(${expense.id})">Eliminar</button>
+                <button class="cg-filter" onclick="window.location.href='edit-expense.html?id=${expense.id}'">Editar</button>
             </td>
         </tr>
     `,

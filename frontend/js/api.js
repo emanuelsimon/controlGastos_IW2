@@ -155,3 +155,28 @@ async function deleteExpense(id) {
     }
     return response.json()
 }
+
+async function getExpenseById(id) {
+    const response = await fetch(`${API_URL}/expenses/${id}`, {
+        headers: {
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+    return response.json()
+}
+
+async function updateExpense(id, datos) {
+    const response = await fetch(`${API_URL}/expenses/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(datos)
+    })
+    if (!response.ok) {
+        const error = await response.json()
+        throw new Error(error.message)
+    }
+    return response.json()
+}

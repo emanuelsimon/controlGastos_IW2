@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/upload.css">
+    <title>CtrlGasto - Editar Gasto</title>
+</head>
+
+<body>
+    <div class="cg-app">
+
+        <!-- SIDEBAR -->
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
+
+            <!-- Nombre del Usuario -->
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Usuario</div>
+            </div>
+
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
+                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
+                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
+                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+            </nav>
+
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+
+        <main class="cg-main">
+            <h1>Editar gasto</h1>
+            <p class="cg-subtitle">Modificá los datos de tu gasto</p>
+
+            <div class="edit-expense">
+                <div class="cg-chart-box">
+                    <h2>Datos del gasto</h2>
+                    <form id="expense-form">
+                        <div class="cg-row">
+                            <div class="cg-field">
+                                <label>Fecha <span style="color: #e74c3c">*</span></label>
+                                <input type="date" id="fecha">
+                            </div>
+                            <div class="cg-field">
+                                <label>Monto <span style="color: #e74c3c">*</span></label>
+                                <input type="text" id="monto" placeholder="$0.00">
+                            </div>
+                        </div>
+                        <div class="cg-field">
+                            <label>Comercio <span style="color: #e74c3c">*</span></label>
+                            <input type="text" id="comercio" placeholder="Nombre del comercio">
+                        </div>
+                        <div class="cg-field">
+                            <label>Categoría <span style="color: #e74c3c">*</span></label>
+                            <select id="categoria">
+                                <option value="">-- Seleccioná una categoría --</option>
+                                <option value="Alimentación">Alimentación</option>
+                                <option value="Combustible">Combustible</option>
+                                <option value="Salud">Salud</option>
+                                <option value="Ocio">Ocio</option>
+                                <option value="Transporte">Transporte</option>
+                                <option value="Educación">Educación</option>
+                                <option value="Hogar">Hogar</option>
+                                <option value="Ropa">Ropa</option>
+                                <option value="Servicios">Servicios</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="cg-field">
+                            <label>Descripción</label>
+                            <input type="text" id="descripcion" placeholder="Nota opcional">
+                        </div>
+                        <button class="cg-btn" type="submit">Guardar gasto</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="js/utils.js"></script>
+        <script src="js/api.js"></script>
+        <script src="js/edit-expense.js"></script>
+</body>
+
+</html>

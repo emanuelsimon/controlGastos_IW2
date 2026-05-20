@@ -11,6 +11,44 @@ import { CreateExpenseDto, UpdateExpenseDto } from './dto/expense.dto';
 export class ExpensesController {
   constructor(private expensesService: ExpensesService) { }
 
+  @Put(':id')
+  async update(
+    @CurrentUser() user: any,
+    @Param('id') id: number,
+    @Body() updateExpenseDto: UpdateExpenseDto
+  ) {
+    // Verificar que el usuario sea asesor o propietario del gasto
+    const expense = await this.expensesService.findById(id);
+    if (user.rol !== 'asesor' && user.userId !== expense.user.id) {
+      throw new ForbiddenException('No tienes permiso para actualizar este gasto');
+    }
+
+    const updateData: any = {};
+    if (updateExpenseDto.fecha) updateData.fecha = new Date(updateExpenseDto.fecha);
+    if (updateExpenseDto.comercio) updateData.comercio = updateExpenseDto.comercio;
+    if (updateExpenseDto.monto) updateData.monto = updateExpenseDto.monto;
+    if (updateExpenseDto.categoria) updateData.categoria = updateExpenseDto.categoria;
+    if (updateExpenseDto.descripcion) updateData.descripcion = updateExpenseDto.descripcion;
+    if (updateExpenseDto.imagen) updateData.imagen = updateExpenseDto.imagen;
+
+    return this.expensesService.update(id, updateData)
+  }
+
+  @Delete(':id')
+  async remove(
+    @CurrentUser() user: any,
+    @Param('id') id: number
+  ) {
+    // Verificar que el usuario sea asesor o propietario del gasto
+    const expense = await this.expensesService.findById(id);
+    if (user.rol !== 'asesor' && user.userId !== expense.user.id) {
+      throw new ForbiddenException('No tienes permiso para eliminar este gasto');
+    }
+    await this.expensesService.remove(id)
+    return { message: 'Gasto eliminado correctamente' }
+  }
+
+
   // GET /expenses?page=1 → gastos del usuario logueado
   @Get()
   async getMyExpenses(
@@ -44,7 +82,7 @@ export class ExpensesController {
     if (user.rol !== 'asesor' && user.userId !== createExpenseDto.userId) {
       throw new ForbiddenException('No tienes permiso para crear gastos para otro usuario');
     }
-    
+
     return this.expensesService.create({
       comercio: createExpenseDto.comercio,
       fecha: new Date(createExpenseDto.fecha),
@@ -92,40 +130,9 @@ export class ExpensesController {
     return this.expensesService.getReportesComercios(userId)
   }
 
-  @Put(':id')
-  async update(
-    @CurrentUser() user: any,
-    @Param('id') id: number,
-    @Body() updateExpenseDto: UpdateExpenseDto
-  ) {
-    // Verificar que el usuario sea asesor o propietario del gasto
-    const expense = await this.expensesService.findById(id);
-    if (user.rol !== 'asesor' && user.userId !== expense.user.id) {
-      throw new ForbiddenException('No tienes permiso para actualizar este gasto');
-    }
-    
-    const updateData: any = {};
-    if (updateExpenseDto.fecha) updateData.fecha = new Date(updateExpenseDto.fecha);
-    if (updateExpenseDto.comercio) updateData.comercio = updateExpenseDto.comercio;
-    if (updateExpenseDto.monto) updateData.monto = updateExpenseDto.monto;
-    if (updateExpenseDto.categoria) updateData.categoria = updateExpenseDto.categoria;
-    if (updateExpenseDto.descripcion) updateData.descripcion = updateExpenseDto.descripcion;
-    if (updateExpenseDto.imagen) updateData.imagen = updateExpenseDto.imagen;
-    
-    return this.expensesService.update(id, updateData)
+  @Get(':id')
+  async getById(@Param('id') id: number) {
+    return this.expensesService.findById(id)
   }
 
-  @Delete(':id')
-  async remove(
-    @CurrentUser() user: any,
-    @Param('id') id: number
-  ) {
-    // Verificar que el usuario sea asesor o propietario del gasto
-    const expense = await this.expensesService.findById(id);
-    if (user.rol !== 'asesor' && user.userId !== expense.user.id) {
-      throw new ForbiddenException('No tienes permiso para eliminar este gasto');
-    }
-    await this.expensesService.remove(id)
-    return { message: 'Gasto eliminado correctamente' }
-  }
 }

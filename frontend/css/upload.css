@@ -5,6 +5,10 @@
     align-items: start;
 }
 
+.edit-expense {
+    max-width: 600px;
+}
+
 .upload-left {
     display: flex;
     flex-direction: column;
