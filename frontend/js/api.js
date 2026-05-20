@@ -2,7 +2,7 @@
 
 const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? "http://localhost:3000"
-    : "https://tu-backend-en-render.onrender.com"
+    : "https://controlgastos-iw2.onrender.com"
 
 
 //CTRL + K + C para comentar varias líneas de código
