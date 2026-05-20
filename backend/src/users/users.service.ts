@@ -12,7 +12,7 @@ export class UsersService {
     // esto nos permite hacer consultas a la base de datos para obtener, crear, actualizar o eliminar usuarios
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   //Create: Método encargado de crear un nuevo usuario en la base de datos, utilizando el repositorio de User que hemos inyectado, devolviendo 
   // el usuario creado como resultado
@@ -31,19 +31,27 @@ export class UsersService {
   // ordenados por apellido de forma ascendente, y devolviendo solo algunos campos del usuario para no exponer información sensible como la contraseña
   async findAll(page: number = 1, limit: number = 15): Promise<{ data: User[], total: number }> {
     const [data, total] = await this.usersRepository.findAndCount({
-        order: { apellido: 'ASC' },
-        skip: (page - 1) * limit,
-        take: limit,
-        select: ['id', 'nombre', 'apellido', 'dni', 'email', 'rol']
+      order: { apellido: 'ASC' },
+      skip: (page - 1) * limit,
+      take: limit,
+      select: ['id', 'nombre', 'apellido', 'dni', 'email', 'rol']
     })
     return { data, total }
-}
+  }
 
   async findById(id: number): Promise<User | null> {
-    return this.usersRepository.findOne({ 
-        where: { id },
-        select: ['id', 'nombre', 'apellido', 'dni', 'email', 'rol']
+    return this.usersRepository.findOne({
+      where: { id },
+      select: ['id', 'nombre', 'apellido', 'dni', 'email', 'rol']
     })
-}
+  }
+
+  async updateProfile(id: number, data: Partial<User>): Promise<User> {
+    await this.usersRepository.update(id, data)
+    return this.usersRepository.findOne({
+      where: { id },
+      select: ['id', 'nombre', 'apellido', 'dni', 'email', 'rol']
+    }) as Promise<User>
+  }
 
 }

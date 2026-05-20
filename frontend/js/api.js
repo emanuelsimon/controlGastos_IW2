@@ -9,19 +9,19 @@ const API_URL = window.location.hostname === 'localhost' || window.location.host
 
 /** Función para iniciar sesión */
 async function loginUser(email, password) {
-  const response = await fetch(`${API_URL}/auth/login`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
+    const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+    });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
-  }
-  return await response.json();
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message);
+    }
+    return await response.json();
 }
 
 
@@ -44,17 +44,17 @@ async function registerUser(nombre, apellido, dni, email, password, rol) {
 
 
 async function procesarTicket(base64Image) {
-  const response = await fetch(`${API_URL}/tickets/upload`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: JSON.stringify({ image: base64Image }),
-  });
+    const response = await fetch(`${API_URL}/tickets/upload`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({ image: base64Image }),
+    });
 
-  const data = await response.json();
-  return data;
+    const data = await response.json();
+    return data;
 }
 
 
@@ -203,5 +203,19 @@ async function sendRecommendation(mensaje, usuarioId) {
         body: JSON.stringify({ mensaje, asesorId: asesor.id, usuarioId })
     })
     if (!response.ok) throw new Error("Error al enviar recomendación")
+    return response.json()
+}
+
+async function updateProfile(datos) {
+    const user = JSON.parse(localStorage.getItem("user"))
+    const response = await fetch(`${API_URL}/users/${user.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(datos)
+    })
+    if (!response.ok) throw new Error("Error al actualizar perfil")
     return response.json()
 }

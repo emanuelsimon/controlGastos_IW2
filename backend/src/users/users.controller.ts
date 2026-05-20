@@ -1,13 +1,14 @@
-import { Controller, Get, Query, Param, UseGuards, Request, ForbiddenException } from '@nestjs/common';
+import { Controller, Get, Query, Param, UseGuards, Request, ForbiddenException, Put, Body } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt.guard';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
+import { User } from './user.entity';
 
 @Controller('users')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(private usersService: UsersService) { }
 
   // GET /users?page=1 → todos los usuarios (solo para asesores)
   @Get()
@@ -28,5 +29,10 @@ export class UsersController {
       throw new ForbiddenException('No tienes permiso para acceder a este perfil');
     }
     return this.usersService.findById(id)
+  }
+
+  @Put(':id')
+  async updateProfile(@Param('id') id: number, @Body() body: Partial<User>) {
+    return this.usersService.updateProfile(id, body)
   }
 }
