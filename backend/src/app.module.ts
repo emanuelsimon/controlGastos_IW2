@@ -8,6 +8,7 @@ import { ExpensesModule } from './expenses/expenses.module';
 import { AuthModule } from './auth/auth.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 
 @Module({
   //Dentro del decorador @Module le decimos a NestJS cuales modulos son parte de la aplicación
@@ -39,6 +40,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
     ExpensesModule,
     AuthModule,
     TicketsModule,
+    RecommendationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

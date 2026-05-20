@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/upload.css">
+    <title>CtrlGasto - Enviar Recomendación</title>
+</head>
+<body>
+    <div class="cg-app">
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Asesor</div>
+            </div>
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
+                <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
+            </nav>
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+        <main class="cg-main">
+            <h1>Enviar Recomendación</h1>
+            <p class="cg-subtitle" id="subtitle">Para: <span id="user-target"></span></p>
+            <div style="max-width:600px">
+                <div class="cg-chart-box">
+                    <form id="recommendation-form">
+                        <div class="cg-field">
+                            <label>Recomendación <span style="color:#e74c3c">*</span></label>
+                            <textarea id="mensaje" rows="5" style="width:100%; background:#0f1623; border:0.5px solid #2e3a52; border-radius:8px; padding:10px; color:#f1f5f9; font-family:'DM Sans',sans-serif; font-size:14px; resize:vertical" placeholder="Escribí tu recomendación financiera..."></textarea>
+                        </div>
+                        <button class="cg-btn" type="submit">Enviar recomendación</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/send-recommendation.js"></script>
+</body>
+</html>

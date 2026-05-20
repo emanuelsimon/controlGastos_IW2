@@ -183,3 +183,25 @@ async function updateExpense(id, datos) {
     }
     return response.json()
 }
+
+async function getRecommendations() {
+    const user = JSON.parse(localStorage.getItem("user"))
+    const response = await fetch(`${API_URL}/recommendations?userId=${user.id}`, {
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+    })
+    return response.json()
+}
+
+async function sendRecommendation(mensaje, usuarioId) {
+    const asesor = JSON.parse(localStorage.getItem("user"))
+    const response = await fetch(`${API_URL}/recommendations`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify({ mensaje, asesorId: asesor.id, usuarioId })
+    })
+    if (!response.ok) throw new Error("Error al enviar recomendación")
+    return response.json()
+}
