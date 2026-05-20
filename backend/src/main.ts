@@ -27,7 +27,9 @@ async function bootstrap() {
  
   // Habilitá CORS
   app.enableCors({
-    origin: 'http://127.0.0.1:5500',
+    origin: ['http://127.0.0.1:5500',
+      'https://control-gastos-iw-2.vercel.app'
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
