@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>CtrlGasto - Mi Perfil</title>
+</head>
+<body>
+    <div class="cg-app">
+        <aside class="cg-sidebar">
+            <div class="cg-logo">
+                <div class="cg-logo-icon">$</div>
+                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
+            </div>
+            <div class="cg-user">
+                <div class="cg-user-name" id="user-name">Asesor</div>
+            </div>
+            <nav class="cg-nav">
+                <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
+                <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
+                <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
+            </nav>
+            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
+        </aside>
+        <main class="cg-main">
+            <h1>Mi Perfil</h1>
+            <p class="cg-subtitle">Editá tus datos personales</p>
+            <div style="max-width:500px">
+                <div class="cg-chart-box">
+                    <form id="profile-form">
+                        <div class="cg-row">
+                            <div class="cg-field">
+                                <label>Nombre</label>
+                                <input type="text" id="nombre">
+                            </div>
+                            <div class="cg-field">
+                                <label>Apellido</label>
+                                <input type="text" id="apellido">
+                            </div>
+                        </div>
+                        <div class="cg-field">
+                            <label>Email</label>
+                            <input type="email" id="email">
+                        </div>
+                        <div class="cg-field">
+                            <label>Nueva contraseña <span style="color:#64748b; font-size:11px">(opcional)</span></label>
+                            <input type="password" id="password" placeholder="Dejá vacío para no cambiar">
+                        </div>
+                        <button class="cg-btn" type="submit">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/advisor-profile.js"></script>
+</body>
+</html>
