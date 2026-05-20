@@ -7,17 +7,17 @@ verificarRol("asesor")
 inicializarTabla(
     getUsers,
     (user) => `
-        <tr class="clickable-row" onclick="window.location.href='user-detail.html?id=${user.id}'">
-            <td>${user.dni}</td>
-            <td>${user.nombre}</td>
-            <td>${user.apellido}</td>
-            <td>${user.email}</td>
-            <td>
-                <button class="cg-filter" onclick="window.location.href='user-detail.html?id=${user.id}'">Ver gastos →</button>
-                <button class="cg-filter" onclick="window.location.href='send-recommendation.html?userId=${user.id}&nombre=${encodeURIComponent(user.nombre + ' ' + user.apellido)}'">💡 Recomendar</button>
-            </td>
-        </tr>
-    `,
+    <tr>
+        <td>${user.dni}</td>
+        <td>${user.nombre}</td>
+        <td>${user.apellido}</td>
+        <td>${user.email}</td>
+        <td>
+            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href='user-detail.html?id=${user.id}'">Ver gastos →</button>
+            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href='send-recommendation.html?userId=${user.id}&nombre=${encodeURIComponent(user.nombre + ' ' + user.apellido)}'">💡 Recomendar</button>
+        </td>
+    </tr>
+`,
     //Cada filtro es una función que recibe el array de datos y lo ordena según el criterio seleccionado.
     {
         "Por Apellido": (d) => d.sort((a, b) => a.apellido.localeCompare(b.apellido)),
