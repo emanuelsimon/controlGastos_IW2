@@ -1,36 +1,48 @@
-# CtrlGasto
+# CtrlGasto 💰
 Plataforma inteligente de gestión de gastos personales — Proyecto final Ingeniería Web II (UNDEF 2026)
 
 ---
 
-## Descripción
+## 📋 Descripción
 
-CtrlGasto es una aplicación web que permite a los usuarios registrar y analizar sus gastos personales mediante la carga manual o por foto de ticket, con interpretación automática por OCR e inferencia de categoría. Los asesores financieros tienen un panel propio para visualizar los patrones de consumo de cada usuario y enviarles recomendaciones personalizadas.
+CtrlGasto es una aplicación web que permite a los usuarios registrar y analizar sus gastos personales mediante la carga manual o por foto de ticket (con interpretación por IA). Los asesores financieros tienen un panel propio para visualizar y analizar los patrones de consumo de cada usuario.
 
 ---
 
-## Funcionalidades implementadas
+## Estado actual del proyecto
 
-### Usuario
-- Registro e inicio de sesión
+### Frontend (completo)
+Interfaz web desarrollada con HTML, CSS y JavaScript puro, con diseño oscuro y moderno.
+
+**Pantallas del Usuario:**
+- Login y Registro
 - Dashboard con navegación por sidebar
-- Historial de gastos con filtros por comercio, categoría y mes, y paginado
-- Carga de gastos manual o por foto de ticket con drag & drop
-- Procesamiento de ticket con OCR (extracción automática de comercio, monto, fecha y categoría)
-- Reportes con gráficos de torta, barras y ranking de comercios
-- Edición y eliminación de gastos
-- Recepción de recomendaciones financieras del asesor
-- Edición de perfil
+- Historial de gastos con filtros y paginado
+- Carga de gastos con drag & drop de imagen de ticket
+- Reportes con gráficos (torta, barras, ranking)
 
-### Asesor
-- Panel con lista de usuarios registrados
-- Visualización de gastos por usuario
-- Envío de recomendaciones financieras a usuarios
-- Edición de perfil
+**Pantallas del Asesor:**
+- Panel del asesor
+- Lista de usuarios con filtros y paginado
+- Detalle de gastos por usuario
+
+### ✅ Backend (parcialmente implementado)
+API REST desarrollada con NestJS y PostgreSQL.
+
+**Implementado:**
+- Autenticación: `POST /auth/register` y `POST /auth/login`
+- Entidad `Usuario` con TypeORM
+- Generación de tokens JWT
+- Hash de contraseñas con bcrypt
+
+**Pendiente:**
+- Endpoints CRUD de gastos
+- Integración con IA para procesamiento de tickets
+- Endpoints del asesor
 
 ---
 
-## Tecnologías
+## 🛠️ Tecnologías
 
 | Capa | Tecnología |
 |------|-----------|
@@ -39,90 +51,78 @@ CtrlGasto es una aplicación web que permite a los usuarios registrar y analizar
 | Base de datos | PostgreSQL |
 | ORM | TypeORM |
 | Autenticación | JWT + bcrypt |
-| OCR | OCR.space API |
 | Gráficos | Chart.js |
-| Deploy frontend | Vercel |
-| Deploy backend | Render |
 
 ---
 
-## URLs de producción
-
-- Frontend: https://control-gastos-iw-2.vercel.app
-- Backend: https://dashboard.render.com/project/prj-d86hn98g4nts73atsq70/environment/evm-d86hn98g4nts73atsq7g
-
----
-
-## Estructura del proyecto
+## 📁 Estructura del proyecto
 
 ```
 controlGastos_IW2/
 ├── frontend/
-│   ├── index.html
-│   ├── register.html
-│   ├── dashboard.html
-│   ├── expenses.html
-│   ├── upload.html
-│   ├── edit-expense.html
-│   ├── reports.html
-│   ├── recommendations.html
-│   ├── profile.html
+│   ├── index.html              ← Login
+│   ├── register.html           ← Registro
+│   ├── dashboard.html          ← Panel usuario
+│   ├── expenses.html           ← Historial de gastos
+│   ├── upload.html             ← Carga de ticket
+│   ├── reports.html            ← Reportes y gráficos
 │   ├── advisor/
-│   │   ├── dashboard.html
-│   │   ├── users.html
-│   │   ├── user-detail.html
-│   │   ├── send-recommendation.html
-│   │   └── profile.html
+│   │   ├── dashboard.html      ← Panel asesor
+│   │   ├── users.html          ← Lista de usuarios
+│   │   └── user-detail.html    ← Gastos por usuario
 │   ├── css/
-│   │   ├── styles.css
-│   │   ├── auth.css
-│   │   ├── dashboard.css
-│   │   ├── expenses.css
-│   │   ├── upload.css
-│   │   └── reports.css
+│   │   ├── styles.css          ← Estilos globales
+│   │   ├── auth.css            ← Login y registro
+│   │   ├── dashboard.css       ← Dashboard
+│   │   ├── expenses.css        ← Tabla de gastos
+│   │   ├── upload.css          ← Carga de ticket
+│   │   └── reports.css         ← Reportes
 │   └── js/
-│       ├── utils.js
-│       ├── api.js
-│       ├── auth.js
-│       ├── dashboard.js
-│       ├── expenses.js
-│       ├── upload.js
-│       ├── edit-expense.js
-│       ├── reports.js
-│       ├── recommendations.js
-│       ├── profile.js
-│       ├── users.js
-│       ├── user-detail.js
-│       ├── send-recommendation.js
-│       ├── advisor-dashboard.js
-│       └── advisor-profile.js
+│       ├── utils.js            ← Funciones reutilizables
+│       ├── api.js              ← Llamadas al backend
+│       ├── auth.js             ← Lógica de login
+│       ├── dashboard.js        ← Lógica del dashboard
+│       ├── expenses.js         ← Lógica de gastos
+│       ├── upload.js           ← Lógica de carga
+│       ├── reports.js          ← Lógica de reportes
+│       ├── users.js            ← Lógica lista usuarios
+│       ├── user-detail.js      ← Lógica detalle usuario
+│       └── advisor-dashboard.js
 └── backend/
     └── src/
-        ├── auth/
-        ├── users/
-        ├── expenses/
-        ├── tickets/
-        ├── recommendations/
-        └── app.module.ts
+        ├── auth/               ← Módulo de autenticación
+        ├── users/              ← Módulo de usuarios
+        ├── expenses/           ← Módulo de gastos (pendiente)
+        └── app.module.ts       ← Módulo raíz
 ```
 
 ---
 
-## Instalacion y uso local
+## 🧪 Cuentas de prueba
+
+El frontend usa datos simulados. Para probar la aplicación usar las siguientes credenciales:
+
+| Rol | Email | Contraseña |
+|-----|-------|-----------|
+| Usuario | user@mail.com | user |
+| Asesor | asesor@mail.com | asesor |
+
+> ⚠️ El backend real requiere registrarse en `POST /auth/register`. Las credenciales de prueba solo funcionan con el frontend en modo simulado.
+
+---
+
+## ⚙️ Instalación y uso
 
 ### Frontend
-
-No requiere instalacion. Abrir `frontend/index.html` con Live Server (VSCode) o cualquier servidor local.
+No requiere instalación. Abrí `frontend/index.html` con Live Server (VSCode) o cualquier servidor local.
 
 ### Backend
-
 ```bash
 cd backend
 npm install
 ```
 
-Crear un archivo `.env` en la carpeta `backend/` con:
-
+Creá un archivo `.env` en la carpeta `backend/` con:
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -130,11 +130,9 @@ DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
 DB_DATABASE=ctrlgasto
 JWT_SECRET=tu_clave_secreta
-OCR_SPACE_API_KEY=tu_api_key
 ```
 
-Iniciar el servidor en modo desarrollo:
-
+Luego iniciá el servidor:
 ```bash
 npm run start:dev
 ```
@@ -143,4 +141,4 @@ El backend corre en `http://localhost:3000`
 
 ---
 
-Benitez Emanuel - Ingenieria Web II - UNDEF 2026
+Benitez Emanuel - Proyecto desarrollado para la materia Ingeniería Web II — UNDEF 2026
