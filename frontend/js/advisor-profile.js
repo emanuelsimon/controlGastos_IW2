@@ -4,7 +4,7 @@ verificarRol("asesor")
 document.getElementById("logout-btn").addEventListener("click", function() {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
-    window.location.href = ROUTES.getPath("index.html")
+    window.location.href = "index.html"
     
 })
 

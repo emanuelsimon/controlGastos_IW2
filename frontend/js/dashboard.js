@@ -13,8 +13,8 @@ let user = JSON.parse(localStorage.getItem("user"))
 document.getElementById("user-name").textContent = user.name 
 
 if (user.rol === "asesor") {
-    // Redirigir al panel del asesor
-    window.location.href = "/advisor/dashboard.html"
+    // Redirigir al panel del asesor si el rol es "asesor"
+    window.location.href = "advisor/dashboard.html"
 }
 
 document.getElementById("logout-btn").addEventListener("click", function() {

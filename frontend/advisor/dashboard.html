@@ -20,7 +20,7 @@
             <nav class="cg-nav">
                 <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
                 <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
-                <a href="profile.html" class="cg-nav-item">👤 Perfil</a>
+                <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
             </nav>
             <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
         </aside>
@@ -29,7 +29,7 @@
             <h1>Panel del Asesor</h1>
             <p class="cg-subtitle">¿Qué querés hacer hoy?</p>
             <div class="cards-container">
-                <div class="card-option" onclick="window.location.href=ROUTES.getPath('advisor/users.html')">
+                <div class="card-option" onclick="window.location.href='users.html'">
                     <span class="card-icon">👥</span>
                     <h2>Ver Usuarios</h2>
                     <p>Visualizá la lista de usuarios registrados</p>
@@ -37,7 +37,6 @@
             </div>
         </main>
     </div>
-    <script src="../js/routes.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/advisor-dashboard.js"></script>
 </body>

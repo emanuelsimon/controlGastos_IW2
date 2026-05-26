@@ -10,7 +10,7 @@ document.getElementById("user-target").textContent = usuarioNombre || `Usuario #
 document.getElementById("logout-btn").addEventListener("click", function() {
     localStorage.removeItem("token")
     localStorage.removeItem("user")
-    window.location.href = ROUTES.getPath("../index.html")
+    window.location.href = "../index.html"
 })
 
 document.getElementById("recommendation-form").addEventListener("submit", async function(e) {
@@ -23,7 +23,7 @@ document.getElementById("recommendation-form").addEventListener("submit", async 
     try {
         await sendRecommendation(mensaje, usuarioId)
         alert("Recomendación enviada correctamente")
-        window.location.href = ROUTES.getPath("users.html")
+        window.location.href = "users.html"
     } catch (error) {
         alert("Error: " + error.message)
     }

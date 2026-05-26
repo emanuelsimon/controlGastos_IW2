@@ -1,7 +1,7 @@
 function verificarToken() {
   let token = localStorage.getItem("token");
   if (!token) {
-    window.location.href = ROUTES.getPath("index.html");
+    window.location.href = "index.html";
   }
 }
 
@@ -12,9 +12,9 @@ function verificarRol(rolRequerido) {
   let user = JSON.parse(localStorage.getItem("user"));
   if (user.rol !== rolRequerido) {
     if (user.rol === "asesor") {
-      window.location.href = ROUTES.getPath("advisor/dashboard.html");
+      window.location.href = "advisor/dashboard.html";
     } else {
-      window.location.href = ROUTES.getPath("dashboard.html");
+      window.location.href = "dashboard.html";
     }
   }
 }
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("logout-btn").addEventListener("click", function () {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  window.location.href = ROUTES.getPath("index.html");
+  window.location.href = "index.html";
 });
 
 //La funcion inicializarTabla se llama desde expenses.html y advisor/users.html

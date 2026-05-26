@@ -9,11 +9,17 @@ if (loginForm) {
         let password = document.getElementById("password").value
 
         const data = await loginUser(email, password)
+        console.log(data)
         
         if (data.token) {
             localStorage.setItem("token", data.token)
             localStorage.setItem("user", JSON.stringify(data.user))
-            window.location.href = "dashboard.html"
+
+            if (data.user.rol === "asesor") {
+                window.location.href = "advisor/dashboard.html";
+            } else {
+                window.location.href = "dashboard.html";
+            }
         } else {
             alert("Email o contraseña incorrectos")
         }
