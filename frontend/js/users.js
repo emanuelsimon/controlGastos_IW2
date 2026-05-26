@@ -13,8 +13,8 @@ inicializarTabla(
         <td>${user.apellido}</td>
         <td>${user.email}</td>
         <td>
-            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href='user-detail.html?id=${user.id}'">Ver gastos →</button>
-            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href='send-recommendation.html?userId=${user.id}&nombre=${encodeURIComponent(user.nombre + ' ' + user.apellido)}'">💡 Recomendar</button>
+            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href=ROUTES.getPath('user-detail.html?id=${user.id}')">Ver gastos →</button>
+            <button class="cg-filter" onclick="event.stopPropagation(); window.location.href=ROUTES.getPath('send-recommendation.html?userId=${user.id}&nombre=${encodeURIComponent(user.nombre + ' ' + user.apellido)}')">💡 Recomendar</button>
         </td>
     </tr>
 `,

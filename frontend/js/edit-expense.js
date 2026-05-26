@@ -20,7 +20,7 @@ getExpenseById(expenseId).then(expense => {
     document.getElementById("descripcion").value = expense.descripcion
 }).catch(error => {
     alert("Error al cargar el gasto: " + error.message)
-    window.location.href = "expenses.html"
+    window.location.href = ROUTES.getPath("expenses.html")
 })
 
 document.getElementById("expense-form").addEventListener("submit", async function (event) {
@@ -41,7 +41,7 @@ document.getElementById("expense-form").addEventListener("submit", async functio
     try {
         await updateExpense(id, { comercio, fecha, monto, categoria, descripcion })
         alert("Gasto actualizado correctamente")
-        window.location.href = "expenses.html"
+        window.location.href = ROUTES.getPath("expenses.html")
     } catch (error) {
         alert("Error al actualizar el gasto: " + error.message)
     }
