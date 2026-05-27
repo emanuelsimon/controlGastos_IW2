@@ -10,6 +10,7 @@ document.getElementById("logout-btn").addEventListener("click", function() {
 
 const user = JSON.parse(localStorage.getItem("user"))
 document.getElementById("nombre").value = user.name || ''
+document.getElementById("apellido").value = user.surname || ''
 document.getElementById("email").value = user.email || ''
 
 document.getElementById("profile-form").addEventListener("submit", async function(e) {
@@ -28,6 +29,7 @@ document.getElementById("profile-form").addEventListener("submit", async functio
         const updated = await updateProfile(datos)
         const userActual = JSON.parse(localStorage.getItem("user"))
         userActual.name = updated.nombre
+        userActual.surname = updated.apellido
         userActual.email = updated.email
         localStorage.setItem("user", JSON.stringify(userActual))
         alert("Perfil actualizado correctamente")
