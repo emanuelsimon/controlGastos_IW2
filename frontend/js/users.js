@@ -1,3 +1,5 @@
+cargarSidebarAsesor();
+
 // Verificar que el usuario esté autenticado al cargar la página
 verificarToken()
 // Verificar que el usuario tenga el rol de asesor

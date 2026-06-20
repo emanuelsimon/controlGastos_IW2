@@ -16,28 +16,7 @@
     <div class="cg-app">
 
         <!-- SIDEBAR -->
-        <aside class="cg-sidebar">
-            <div class="cg-logo">
-                <div class="cg-logo-icon">$</div>
-                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-            </div>
-
-            <!-- Nombre del Usuario -->
-            <div class="cg-user">
-                <div class="cg-user-name" id="user-name">Usuario</div>
-            </div>
-
-            <nav class="cg-nav">
-                <a href="dashboard.html" class="cg-nav-item">🏠 Dashboard</a>
-                <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
-                <a href="upload.html" class="cg-nav-item">📤 Subir</a>
-                <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
-                <a href="recommendations.html" class="cg-nav-item">💡 Recomendaciones</a>
-                <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
-            </nav>
-
-            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
-        </aside>
+        <div id="sidebar-container"></div>
         <main class="cg-main">
             <h1>Panel principal</h1>
             <p class="cg-subtitle">¿Qué querés hacer hoy?</p>
@@ -62,6 +41,8 @@
             </div>
         </main>
     </div>
+    <script src="js/config.js"></script>
+    <script src="js/components.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/api.js"></script>
     <script src="js/dashboard.js"></script>

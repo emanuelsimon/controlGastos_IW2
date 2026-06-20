@@ -1,11 +1,10 @@
-/** Archivo para manejar las llamadas a la API del backend */
-
-const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? "http://localhost:3000"
-    : "https://controlgastos-iw2.onrender.com"
-
-
-//CTRL + K + C para comentar varias líneas de código
+/**
+ * api.js — Llamadas al backend
+ *
+ * API_URL se carga desde js/config.js, que a su vez la toma
+ * de la variable de entorno inyectada por Vercel en producción,
+ * o usa http://localhost:3000 en desarrollo local.
+ */
 
 /** Función para iniciar sesión */
 async function loginUser(email, password) {

@@ -19,36 +19,8 @@ function verificarRol(rolRequerido) {
   }
 }
 
-function activarMenu() {
-  document.querySelectorAll(".cg-nav-item").forEach((link) => {
-    const page = link.getAttribute("href");
-    if (window.location.pathname.endsWith(page)) {
-      link.classList.add("active");
-    }
-  });
-}
-
-function mostrarUsuario() {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const el = document.getElementById("user-name");
-
-  if (user && el) {
-    el.textContent = user.name;
-  }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  activarMenu();
-  mostrarUsuario();
-});
-
-//Funcion agregada al boton de logout, al hacer click se borra el token y el usuario del localStorage
-//redirigiendo al usuario a la página de login (index.html).
-document.getElementById("logout-btn").addEventListener("click", function () {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  window.location.href = "/index.html";
-});
+// activarMenu(), mostrarUsuario() y el listener de logout están en components.js,
+// que los ejecuta luego de renderizar el sidebar en el DOM.
 
 //La funcion inicializarTabla se llama desde expenses.html y advisor/users.html
 // para cargar los datos en la tabla, renderizar las filas y manejar el paginado.

@@ -1,3 +1,5 @@
+cargarSidebarUsuario();
+
 /* upload.js - Lógica para la subida de archivos */
 
 // Verificar que el usuario esté autenticado al cargar la página

@@ -1,3 +1,5 @@
+cargarSidebarAsesor();
+
 // Función para verificar los gastos del usuario
 
 // Verificar que el usuario esté autenticado al cargar la página
@@ -13,7 +15,6 @@ let userId = params.get("id")
 async function mostrarNombreUsuario() {
     const user = await getUserById(userId)
     if (user) {
-        document.getElementById("user-name-detail").textContent = `${user.nombre} ${user.apellido}`
     }
 }
 mostrarNombreUsuario()

@@ -1,11 +1,6 @@
+cargarSidebarUsuario();
+
 verificarToken()
-
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    window.location.href = "index.html"
-})
-
 // Pre-completar con datos actuales
 const user = JSON.parse(localStorage.getItem("user"))
 document.getElementById("nombre").value = user.name || ''

@@ -1,3 +1,5 @@
+cargarSidebarUsuario();
+
 /* reports.js - Lógica de reportes */
 
 // Verificar que el usuario esté autenticado al cargar la página

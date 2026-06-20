@@ -9,21 +9,7 @@
 </head>
 <body>
     <div class="cg-app">
-        <aside class="cg-sidebar">
-            <div class="cg-logo">
-                <div class="cg-logo-icon">$</div>
-                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-            </div>
-            <div class="cg-user">
-                <div class="cg-user-name" id="user-name">Asesor</div>
-            </div>
-            <nav class="cg-nav">
-                <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
-                <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
-                <a href="profile.html" class="cg-nav-item">👤 MiPerfil</a>
-            </nav>
-            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
-        </aside>
+        <div id="sidebar-container"></div>
         <main class="cg-main">
             <h1>Enviar Recomendación</h1>
             <p class="cg-subtitle" id="subtitle">Para: <span id="user-target"></span></p>
@@ -40,6 +26,8 @@
             </div>
         </main>
     </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/components.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/api.js"></script>
     <script src="../js/send-recommendation.js"></script>

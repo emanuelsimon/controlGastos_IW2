@@ -1,3 +1,5 @@
+cargarSidebarAsesor();
+
 verificarToken()
 verificarRol("asesor")
 
@@ -6,13 +8,6 @@ const usuarioId = params.get("userId")
 const usuarioNombre = params.get("nombre")
 
 document.getElementById("user-target").textContent = usuarioNombre || `Usuario #${usuarioId}`
-
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    window.location.href = "../index.html"
-})
-
 document.getElementById("recommendation-form").addEventListener("submit", async function(e) {
     e.preventDefault()
     const mensaje = document.getElementById("mensaje").value

@@ -1,13 +1,7 @@
+cargarSidebarAsesor();
+
 verificarToken()
 verificarRol("asesor")
-
-document.getElementById("logout-btn").addEventListener("click", function() {
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    window.location.href = "index.html"
-    
-})
-
 const user = JSON.parse(localStorage.getItem("user"))
 document.getElementById("nombre").value = user.name || ''
 document.getElementById("apellido").value = user.surname || ''

@@ -9,21 +9,7 @@
 </head>
 <body>
     <div class="cg-app">
-        <aside class="cg-sidebar">
-            <div class="cg-logo">
-                <div class="cg-logo-icon">$</div>
-                <div class="cg-logo-text">Ctrl<span>Gasto</span></div>
-            </div>
-            <div class="cg-user">
-                <div class="cg-user-name" id="user-name">Asesor</div>
-            </div>
-            <nav class="cg-nav">
-                <a href="dashboard.html" class="cg-nav-item">🏠 Panel</a>
-                <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
-                <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
-            </nav>
-            <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
-        </aside>
+        <div id="sidebar-container"></div>
 
         <main class="cg-main">
             <h1>Panel del Asesor</h1>
@@ -37,6 +23,8 @@
             </div>
         </main>
     </div>
+    <script src="../js/config.js"></script>
+    <script src="../js/components.js"></script>
     <script src="../js/utils.js"></script>
     <script src="../js/advisor-dashboard.js"></script>
 </body>

@@ -1,3 +1,5 @@
+cargarSidebarAsesor();
+
 /* Este archivo se encarga de manejar la lógica del dashboard, como mostrar el nombre del usuario, 
 cargar los gastos, etc. */
 

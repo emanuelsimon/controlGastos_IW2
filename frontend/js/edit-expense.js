@@ -1,3 +1,5 @@
+cargarSidebarUsuario();
+
 /**Logica para editar un gasto */
 
 verificarToken()

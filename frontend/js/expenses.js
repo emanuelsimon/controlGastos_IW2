@@ -1,3 +1,5 @@
+cargarSidebarUsuario();
+
 /* expenses.js - Lógica para la página de visualización de gastos */
 
 // Verificar que el usuario esté autenticado al cargar la página
