@@ -10,11 +10,16 @@
 <body>
     <div class="cg-app">
         <div id="sidebar-container"></div>
-
         <main class="cg-main">
             <h1>Panel del Asesor</h1>
-            <p class="cg-subtitle">¿Qué querés hacer hoy?</p>
-            <div class="cards-container">
+            <p class="cg-subtitle">Estadísticas globales de todos los usuarios</p>
+
+            <!-- Estadísticas globales -->
+            <div id="stats-grid" class="cg-stats-grid">
+                <p style="color:#64748b">Cargando estadísticas...</p>
+            </div>
+
+            <div class="cards-container" style="margin-top:1.5rem">
                 <div class="card-option" onclick="window.location.href='users.html'">
                     <span class="card-icon">👥</span>
                     <h2>Ver Usuarios</h2>
@@ -26,6 +31,7 @@
     <script src="../js/config.js"></script>
     <script src="../js/components.js"></script>
     <script src="../js/utils.js"></script>
+    <script src="../js/api.js"></script>
     <script src="../js/advisor-dashboard.js"></script>
 </body>
 </html>

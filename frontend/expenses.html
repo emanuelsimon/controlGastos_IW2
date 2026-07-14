@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,30 +7,60 @@
     <link rel="stylesheet" href="css/expenses.css">
     <title>CtrlGasto - Gastos</title>
 </head>
-
 <body>
     <div class="cg-app">
-
-        <!-- SIDEBAR -->
         <div id="sidebar-container"></div>
-
         <main class="cg-main">
             <h1>Gastos</h1>
             <p class="cg-subtitle">Historial de movimientos</p>
 
+            <!-- Banner de alerta presupuesto -->
+            <div id="alert-banner" class="cg-alert-banner" style="display:none"></div>
+
             <div class="content-box">
 
-                <!-- Filtros -->
-                <div class="cg-filters">
-                    <button class="cg-filter active">Todos</button>
-                    <button class="cg-filter">Por mes</button>
-                    <button class="cg-filter">Categoría</button>
-                    <button class="cg-filter">Comercio</button>
+                <!-- Búsqueda avanzada -->
+                <div class="cg-search-bar">
+                    <div class="cg-search-group">
+                        <label>Comercio</label>
+                        <input type="text" id="filtro-comercio" placeholder="Buscar...">
+                    </div>
+                    <div class="cg-search-group">
+                        <label>Categoría</label>
+                        <select id="filtro-categoria">
+                            <option value="">Todas</option>
+                            <option>Alimentación</option><option>Combustible</option>
+                            <option>Salud</option><option>Ocio</option>
+                            <option>Transporte</option><option>Educación</option>
+                            <option>Hogar</option><option>Ropa</option>
+                            <option>Servicios</option><option>Otro</option>
+                        </select>
+                    </div>
+                    <div class="cg-search-group">
+                        <label>Desde</label>
+                        <input type="date" id="filtro-desde">
+                    </div>
+                    <div class="cg-search-group">
+                        <label>Hasta</label>
+                        <input type="date" id="filtro-hasta">
+                    </div>
+                    <div class="cg-search-group">
+                        <label>Monto mín.</label>
+                        <input type="number" id="filtro-monto-min" placeholder="0">
+                    </div>
+                    <div class="cg-search-group">
+                        <label>Monto máx.</label>
+                        <input type="number" id="filtro-monto-max" placeholder="∞">
+                    </div>
                 </div>
 
-                <!-- Tabla -->
-                <div class="cg-table-wrapper">
-                    
+                <!-- Exportación -->
+                <div class="cg-export-bar">
+                    <button class="cg-export-btn" onclick="exportarCSV()">⬇ CSV</button>
+                    <button class="cg-export-btn" onclick="exportarJSON()">⬇ JSON</button>
+                </div>
+
+                <div class="cg-table-wrapper"> 
                     <table class="cg-table">
                         <thead>
                             <tr>
@@ -39,20 +68,20 @@
                                 <th>Categoría</th>
                                 <th>Fecha</th>
                                 <th>Monto</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody id="expenses-table-body"></tbody>
+                        <tbody></tbody> <!-- El contenido de la tabla se llenará dinámicamente con JavaScript desde el archivo expenses.js -->
                     </table>
                 </div>
-                
             </div>
             <div class="cg-pagination" id="pagination"></div>
         </main>
-        <script src="js/config.js"></script>
+    </div>
+    <script src="js/config.js"></script>
     <script src="js/components.js"></script>
     <script src="js/utils.js"></script>
-        <script src="js/api.js"></script>
-        <script src="js/expenses.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/expenses.js"></script>
 </body>
-
 </html>

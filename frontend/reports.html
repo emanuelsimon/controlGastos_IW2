@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/reports.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap"
-        rel="stylesheet">
     <title>CtrlGasto - Reportes</title>
-
+</head>
 <body>
     <div class="cg-app">
-
-        <!-- SIDEBAR -->
         <div id="sidebar-container"></div>
-
         <main class="cg-main">
             <h1>Reportes</h1>
-            <p class="cg-subtitle">Visualiza tu historial de gastos</p>
+            <p class="cg-subtitle">Visualizá tu historial de gastos</p>
+
+            <!-- Comparación de meses -->
+            <div class="cg-chart-box" style="margin-bottom:1.5rem">
+                <h2>Comparación mes actual vs anterior</h2>
+                <div id="comparacion-meses"><p style="color:#64748b;font-size:13px">Cargando...</p></div>
+            </div>
 
             <div class="content-box">
-
                 <div class="cg-dashboard">
+
+                    <!-- Gráfico 1 -->
                     <div class="cg-chart-box">
-                        <h2>Gastos por Categoría</h2>
+                        <h2>Gastos por categoría</h2>
                         <canvas id="grafico-categorias"></canvas>
                     </div>
 
+                    <!-- Gráfico 2 -->
                     <div class="cg-chart-box">
-                        <h2>Gastos por Mes</h2>
+                        <h2>Gastos por mes</h2>
                         <canvas id="grafico-meses"></canvas>
                     </div>
 
+                    <!-- Gráfico 3 -->
                     <div class="cg-chart-box">
                         <h2>Comercios más frecuentes</h2>
                         <canvas id="grafico-comercios"></canvas>
                     </div>
+
                 </div>
             </div>
-        </main>
-</body>
 
-<script src="js/vendor/chart.min.js"></script>
-<script src="js/config.js"></script>
+            <!-- Ranking de comercios -->
+            <div class="cg-chart-box" style="margin-top:1.5rem">
+                <h2>Ranking de comercios</h2>
+                <div id="ranking-comercios"><p style="color:#64748b;font-size:13px">Cargando...</p></div>
+            </div>
+
+            <!-- Patrones de consumo -->
+            <div class="cg-chart-box" style="margin-top:1.5rem">
+                <h2>Patrones de consumo</h2>
+                <div id="patrones-consumo"><p style="color:#64748b;font-size:13px">Cargando...</p></div>
+            </div>
+
+        </main>
+    </div>
+    <script src="js/vendor/chart.min.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/components.js"></script>
     <script src="js/utils.js"></script>
-<script src="js/api.js"></script>
-<script src="js/reports.js"></script>
-
+    <script src="js/api.js"></script>
+    <script src="js/reports.js"></script>
+</body>
 </html>

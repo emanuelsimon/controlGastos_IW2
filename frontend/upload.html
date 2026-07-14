@@ -32,6 +32,16 @@
                     <img id="preview-img"
                         style="display:none; width:100%; margin-top:1rem; border-radius:12px; border: 0.5px solid #2e3a52">
                     <button class="cg-btn" id="procesar-btn" style="margin-top:1rem">✨ Procesar con IA</button>
+
+                    <!-- Carga múltiple -->
+                    <div style="margin-top:2rem">
+                        <h3 style="font-size:14px;color:#94a3b8;margin-bottom:8px">📂 Carga múltiple de tickets</h3>
+                        <p style="font-size:12px;color:#64748b;margin-bottom:10px">Seleccioná varias imágenes para
+                            procesarlas automáticamente.</p>
+                        <input type="file" id="multi-ticket-input" accept="image/*" multiple
+                            style="font-size:13px;color:#94a3b8;background:#0f1623;border:0.5px solid #2e3a52;border-radius:8px;padding:8px;width:100%">
+                        <div id="multi-queue" class="cg-multi-queue"></div>
+                    </div>
                 </div>
 
                 <!-- COLUMNA DERECHA: Formulario -->
@@ -83,8 +93,8 @@
             </div>
         </main>
         <script src="js/config.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/utils.js"></script>
+        <script src="js/components.js"></script>
+        <script src="js/utils.js"></script>
         <script src="js/api.js"></script>
         <script src="js/upload.js"></script>
 </body>

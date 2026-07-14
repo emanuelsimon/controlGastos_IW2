@@ -59,15 +59,18 @@ async function procesarTicket(base64Image) {
 
 //El fetch a la ruta /expenses del backend devuelve un objeto 
 // con una propiedad "data" que contiene el array de gastos.
-async function getExpenses(page = 1) {
+
+//Función para obtener los gastos del usuario logueado, pasando el userId como parámetro en la URL. 
+async function getExpenses(page = 1) 
+{
     const user = JSON.parse(localStorage.getItem("user"))
     const response = await fetch(`${API_URL}/expenses?userId=${user.id}&page=${page}`, {
         headers: {
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
+            "Authorization": `Bearer ${localStorage.getItem("token")}` 
         }
     })
     const data = await response.json()
-    return data.data
+    return data.data // Retornamos solo la propiedad "data" del objeto devuelto por el backend, que contiene el array de gastos.
 }
 
 
@@ -217,4 +220,12 @@ async function updateProfile(datos) {
     })
     if (!response.ok) throw new Error("Error al actualizar perfil")
     return response.json()
+}
+// Obtener todos los gastos de todos los usuarios (solo asesor)
+async function getAllExpenses() {
+    const response = await fetch(`${API_URL}/expenses/all`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+    });
+    const data = await response.json();
+    return data.data || [];
 }

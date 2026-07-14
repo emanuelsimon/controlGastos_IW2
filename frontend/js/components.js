@@ -69,9 +69,11 @@ function cargarSidebarUsuario() {
                 <a href="expenses.html" class="cg-nav-item">📊 Gastos</a>
                 <a href="upload.html" class="cg-nav-item">📤 Subir</a>
                 <a href="reports.html" class="cg-nav-item">📈 Reportes</a>
+                <a href="budgets.html" class="cg-nav-item">💰 Presupuestos</a>
                 <a href="recommendations.html" class="cg-nav-item">💡 Recomendaciones</a>
                 <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
             </nav>
+            <button class="cg-dark-toggle" onclick="toggleDarkMode()">🌙 Modo oscuro</button>
             <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
         </aside>
     `);
@@ -98,6 +100,7 @@ function cargarSidebarAsesor() {
                 <a href="users.html" class="cg-nav-item">👥 Usuarios</a>
                 <a href="profile.html" class="cg-nav-item">👤 Mi Perfil</a>
             </nav>
+            <button class="cg-dark-toggle" onclick="toggleDarkMode()">🌙 Modo oscuro</button>
             <button id="logout-btn" class="cg-logout">Cerrar sesión</button>
         </aside>
     `);

@@ -1,12 +1,13 @@
 /**
- * build.js — Script ejecutado por Vercel antes del deploy
+ * build.js
  *
- * Lee la variable de entorno API_URL definida en el panel de Vercel
- * e inyecta su valor en js/config.js, reemplazando el placeholder
- * window.__API_URL__ con la URL real del backend.
+ * Ejecutado por Vercel antes del deploy.
  *
- * Si API_URL no está definida, lanza un error para que el deploy falle
- * de forma visible en lugar de silenciosamente usar localhost.
+ * Lee la variable de entorno API_URL y genera el archivo
+ * js/config.js con la URL del backend de producción.
+ *
+ * En desarrollo local, el archivo js/config.js del repositorio
+ * apunta a http://localhost:3000.
  */
 
 const fs = require("fs");

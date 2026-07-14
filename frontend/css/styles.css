@@ -393,3 +393,253 @@ h1 {
     color: white;
     border-color: #2563eb;
 }
+
+/* =====================================================
+   FUNCIONALIDADES EXTRAS
+   ===================================================== */
+
+/* Punto 11 — Modo oscuro */
+body.dark-mode {
+    background-color: #070d17;
+    filter: brightness(0.92);
+}
+
+/* Toggle de dark mode en sidebar */
+.cg-dark-toggle {
+    background: transparent;
+    border: 1px solid #2e3a52;
+    color: #94a3b8;
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 8px;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s;
+}
+.cg-dark-toggle:hover { background: #1a2236; color: #fff; }
+
+/* Punto 3 — Banner de alerta de presupuesto */
+.cg-alert-banner {
+    background: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cg-alert-banner.warning {
+    background: #78350f;
+    border-color: #f59e0b;
+    color: #fcd34d;
+}
+
+/* Punto 20 — Badge de gasto anómalo */
+.cg-badge-anomalo {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-left: 6px;
+}
+
+/* Punto 9 — Filtros de búsqueda avanzada */
+.cg-search-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    align-items: flex-end;
+}
+.cg-search-bar input,
+.cg-search-bar select {
+    background: #0f1623;
+    border: 0.5px solid #2e3a52;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: #f1f5f9;
+    font-family: 'DM Sans', sans-serif;
+}
+.cg-search-bar input:focus,
+.cg-search-bar select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+.cg-search-bar label {
+    font-size: 11px;
+    color: #64748b;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+.cg-search-group { display: flex; flex-direction: column; }
+
+/* Punto 10 — Botones de exportación */
+.cg-export-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1rem;
+    justify-content: flex-end;
+}
+.cg-export-btn {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    color: #94a3b8;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+}
+.cg-export-btn:hover { border-color: #2563eb; color: #fff; background: #1e3a6e; }
+
+/* Punto 4 — Presupuestos */
+.cg-budget-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.cg-budget-card {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+.cg-budget-card h3 { font-size: 14px; color: #94a3b8; margin-bottom: 6px; font-weight: 500; }
+.cg-budget-card .cg-budget-amounts {
+    font-size: 13px; color: #64748b; margin-bottom: 10px;
+}
+.cg-budget-card .cg-budget-amounts span { color: #f1f5f9; font-weight: 500; }
+.cg-progress-bar {
+    height: 6px;
+    background: #2e3a52;
+    border-radius: 99px;
+    overflow: hidden;
+}
+.cg-progress-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    background: #2563eb;
+}
+.cg-progress-fill.warning { background: #f59e0b; }
+.cg-progress-fill.danger  { background: #ef4444; }
+
+/* Punto 5 — Meta de ahorro */
+.cg-goal-card {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+.cg-goal-card h2 { font-size: 16px; color: #f1f5f9; margin-bottom: 1rem; }
+.cg-goal-stat { font-size: 28px; font-weight: 600; color: #2563eb; margin: 0.5rem 0; }
+.cg-goal-desc { font-size: 13px; color: #64748b; }
+
+/* Punto 16 — Perfil financiero */
+.cg-profile-card {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+.cg-profile-icon {
+    width: 52px; height: 52px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+}
+.cg-profile-tipo { font-size: 18px; font-weight: 600; color: #f1f5f9; margin-bottom: 4px; }
+.cg-profile-desc { font-size: 13px; color: #64748b; }
+
+/* Punto 19 — Stats del panel de asesor */
+.cg-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.cg-stat-card {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 12px;
+    padding: 1.25rem;
+}
+.cg-stat-label { font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 6px; }
+.cg-stat-value { font-size: 24px; font-weight: 600; color: #f1f5f9; }
+.cg-stat-sub   { font-size: 12px; color: #64748b; margin-top: 4px; }
+
+/* Punto 6 — Comparación de meses */
+.cg-comparison-row {
+    display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;
+}
+.cg-comparison-stat {
+    flex: 1; min-width: 140px;
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+}
+.cg-comparison-stat .label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+.cg-comparison-stat .value { font-size: 22px; font-weight: 600; color: #f1f5f9; }
+.cg-comparison-stat .diff-pos { color: #ef4444; font-size: 13px; }
+.cg-comparison-stat .diff-neg { color: #2ecc71; font-size: 13px; }
+
+/* Punto 7 — Patrones de consumo */
+.cg-pattern-list { list-style: none; padding: 0; margin: 0; }
+.cg-pattern-list li {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0;
+    border-bottom: 0.5px solid #1e293b;
+    font-size: 14px; color: #94a3b8;
+}
+.cg-pattern-list li:last-child { border-bottom: none; }
+.cg-pattern-list li span { color: #f1f5f9; font-weight: 500; }
+
+/* Punto 17/18 — Recomendaciones automáticas */
+.cg-auto-rec {
+    background: #0f2744;
+    border: 0.5px solid #1d4ed8;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #93c5fd;
+    display: flex; gap: 10px; align-items: flex-start;
+}
+.cg-auto-rec-icon { font-size: 18px; flex-shrink: 0; }
+
+/* Punto 12 — Upload múltiple */
+.cg-multi-queue {
+    margin-top: 1rem;
+    display: flex; flex-direction: column; gap: 8px;
+}
+.cg-queue-item {
+    background: #1a2236;
+    border: 0.5px solid #2e3a52;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: #94a3b8;
+}
+.cg-queue-status { margin-left: auto; font-size: 12px; }
+.cg-queue-status.ok    { color: #2ecc71; }
+.cg-queue-status.error { color: #ef4444; }
+.cg-queue-status.wait  { color: #64748b; }

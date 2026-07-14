@@ -136,3 +136,136 @@ function inicializarTabla(getData, renderFila, filtros) {
 
   cargar();
 }
+
+
+/* =====================================================
+   FUNCIONALIDADES EXTRAS
+   ===================================================== */
+
+/**
+ * Punto 1 — Categorización automática por nombre de comercio.
+ * Devuelve la categoría más probable o null si no hay match.
+ */
+function categorizarPorComercio(comercio) {
+    if (!comercio) return null;
+    const nombre = comercio.toLowerCase();
+    const reglas = [
+        { categoria: 'Alimentación', palabras: ['carrefour', 'dia', 'coto', 'jumbo', 'disco', 'supermercado', 'almacen', 'verduleria', 'panaderia', 'mercado', 'walmart', 'lidl', 'aldi', 'fravega', 'super'] },
+        { categoria: 'Combustible',  palabras: ['ypf', 'shell', 'axion', 'puma', 'nafta', 'combustible', 'estacion', 'petrobras'] },
+        { categoria: 'Salud',        palabras: ['farmacia', 'drogueria', 'clinica', 'hospital', 'medico', 'laboratorio', 'optica', 'dentista', 'farmacity', 'ahorro'] },
+        { categoria: 'Ocio',         palabras: ['cine', 'teatro', 'spotify', 'netflix', 'disney', 'hbo', 'steam', 'gaming', 'bar', 'restaurante', 'resto', 'delivery', 'rappi', 'pedidosya'] },
+        { categoria: 'Transporte',   palabras: ['uber', 'cabify', 'taxi', 'colectivo', 'subte', 'tren', 'peaje', 'parking', 'estacionamiento'] },
+        { categoria: 'Educación',    palabras: ['universidad', 'colegio', 'libreria', 'curso', 'udemy', 'coursera', 'academia'] },
+        { categoria: 'Hogar',        palabras: ['easy', 'homecenter', 'sodimac', 'ferreteria', 'ikea', 'muebleria', 'electro'] },
+        { categoria: 'Ropa',         palabras: ['zara', 'h&m', 'lacoste', 'adidas', 'nike', 'ropa', 'indumentaria', 'calzado', 'zapateria'] },
+        { categoria: 'Servicios',    palabras: ['edesur', 'edenor', 'metrogas', 'aysa', 'telecom', 'personal', 'claro', 'movistar', 'fibertel', 'internet', 'cable'] },
+    ];
+    for (const regla of reglas) {
+        if (regla.palabras.some(p => nombre.includes(p))) {
+            return regla.categoria;
+        }
+    }
+    return null;
+}
+
+/**
+ * Perfil financiero del usuario basado en sus gastos.
+ * Devuelve { tipo, descripcion, color } según patrones de consumo.
+ */
+function calcularPerfilFinanciero(gastos) {
+    if (!gastos || gastos.length === 0) {
+        return { tipo: 'Sin datos', descripcion: 'Cargá gastos para ver tu perfil financiero.', color: '#64748b' };
+    }
+
+    const totales = {};
+    let totalGeneral = 0;
+    gastos.forEach(g => {
+        totales[g.categoria] = (totales[g.categoria] || 0) + Number(g.monto);
+        totalGeneral += Number(g.monto);
+    });
+
+    const porcentajes = {};
+    Object.keys(totales).forEach(k => {
+        porcentajes[k] = (totales[k] / totalGeneral) * 100;
+    });
+
+    const ocioYEntretenimiento = (porcentajes['Ocio'] || 0);
+    const esenciales = (porcentajes['Alimentación'] || 0) + (porcentajes['Salud'] || 0) + (porcentajes['Servicios'] || 0);
+    const promedioPorGasto = totalGeneral / gastos.length;
+
+    // Scoring simple
+    if (ocioYEntretenimiento > 35) {
+        return { tipo: 'Consumidor impulsivo', descripcion: 'Más del 35% de tus gastos son en ocio y entretenimiento.', color: '#e74c3c' };
+    }
+    if (esenciales > 70) {
+        return { tipo: 'Consumidor ahorrador', descripcion: 'La mayor parte de tus gastos son en necesidades esenciales. ¡Excelente hábito!', color: '#2ecc71' };
+    }
+    return { tipo: 'Consumidor equilibrado', descripcion: 'Tus gastos están bien distribuidos entre distintas categorías.', color: '#f39c12' };
+}
+
+/**
+ * Detecta si un gasto es anómalo respecto al promedio del usuario.
+ * Retorna true si el monto supera 3x el promedio.
+ */
+function esGastoAnomalo(monto, gastos) {
+    if (!gastos || gastos.length < 3) return false; // Necesitamos al menos 3 gastos para calcular un promedio confiable.
+    // Calculamos el promedio de los montos de todos los gastos del usuario. Se suman todos los montos y se divide por la cantidad de gastos.
+    //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce 
+    const promedio = gastos.reduce((sum, g) => sum + Number(g.monto), 0) / gastos.length; 
+    return Number(monto) > promedio * 3; // Retorna true si el monto del gasto actual es mayor a 3 veces el promedio, indicando que es un gasto anómalo.
+}
+
+/**
+ * Verifica si el gasto total del mes actual supera el presupuesto.
+ * Devuelve { superado, porcentaje, presupuesto, gastado } o null si no hay presupuesto.
+ */
+function verificarAlertaPresupuesto(gastos) {
+    const presupuesto = parseFloat(localStorage.getItem('cg_presupuesto_mensual'));
+    if (!presupuesto) return null;
+
+    const ahora = new Date();
+    const gastadoEsteMes = gastos
+        .filter(g => {
+            const f = new Date(g.fecha);
+            return f.getMonth() === ahora.getMonth() && f.getFullYear() === ahora.getFullYear();
+        })
+        .reduce((sum, g) => sum + Number(g.monto), 0);
+
+    return {
+        superado: gastadoEsteMes >= presupuesto,
+        porcentaje: Math.round((gastadoEsteMes / presupuesto) * 100),
+        presupuesto,
+        gastado: gastadoEsteMes
+    };
+}
+
+/**
+ * Muestra una notificación nativa del browser si el usuario la permite.
+ */
+function mostrarNotificacion(titulo, cuerpo) {
+    if (!('Notification' in window)) return;
+    if (Notification.permission === 'granted') {
+        new Notification(titulo, { body: cuerpo, icon: '' });
+    } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permiso => {
+            if (permiso === 'granted') new Notification(titulo, { body: cuerpo });
+        });
+    }
+}
+
+/**
+ * Aplica o quita el modo oscuro y persiste la preferencia.
+ */
+function toggleDarkMode() {
+    const activo = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('cg_dark_mode', activo ? '1' : '0');
+}
+
+function aplicarDarkModeGuardado() {
+    if (localStorage.getItem('cg_dark_mode') === '1') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+// Aplicar modo oscuro al cargar cualquier página
+aplicarDarkModeGuardado();

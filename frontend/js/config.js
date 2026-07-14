@@ -7,4 +7,4 @@
  * En desarrollo local, se usa el fallback: http://localhost:3000
  */
 
-const API_URL = window.__API_URL__ || "http://localhost:3000";
+const API_URL = "http://localhost:3000";
