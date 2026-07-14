@@ -15,13 +15,13 @@
 }
 
 .cg-dropzone {
-    border: 1.5px dashed #2e3a52;
+    border: 1.5px dashed var(--border);
     border-radius: 12px;
     padding: 3rem 2rem;
     text-align: center;
     cursor: pointer;
     transition: border-color 0.2s, background 0.2s;
-    color: #64748b;
+    color: var(--text-muted);
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -30,10 +30,11 @@
     gap: 0.5rem;
 }
 
-.cg-dropzone:hover, .cg-dropzone.dragover {
-    border-color: #2563eb;
-    background: #2563eb11;
-    color: #f1f5f9;
+.cg-dropzone:hover,
+.cg-dropzone.dragover {
+    border-color: var(--accent);
+    background: rgba(37, 99, 235, 0.06);
+    color: var(--text-primary);
 }
 
 .drop-icon {
@@ -44,27 +45,49 @@
 .drop-title {
     font-size: 15px;
     font-weight: 500;
-    color: #94a3b8;
+    color: var(--text-secondary);
 }
 
 .cg-drop-sub {
     font-size: 12px;
-    color: #475569;
+    color: var(--text-muted);
 }
 
 .cg-chart-box {
-    background: #0f1623;
-    border: 0.5px solid #2e3a52;
+    background: var(--bg-surface);
+    border: 0.5px solid var(--border);
     border-radius: 12px;
     padding: 1.5rem;
 }
 
 .cg-chart-box h2 {
     font-size: 13px;
-    color: #94a3b8;
+    color: var(--text-secondary);
     margin-bottom: 1.25rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+/* Punto 12 — Input de archivo múltiple oculto con botón custom */
+.cg-multi-file-label {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.cg-multi-file-label:hover {
+    background: var(--accent-hover);
 }
 
 @media (max-width: 768px) {

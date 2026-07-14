@@ -254,18 +254,29 @@ function mostrarNotificacion(titulo, cuerpo) {
 }
 
 /**
- * Aplica o quita el modo oscuro y persiste la preferencia.
+ * Punto 11 — Alterna entre modo oscuro (default) y modo claro.
+ * Persiste la preferencia en localStorage y actualiza el texto del botón.
  */
 function toggleDarkMode() {
-    const activo = document.body.classList.toggle('dark-mode');
-    localStorage.setItem('cg_dark_mode', activo ? '1' : '0');
+    const esModoClaro = document.body.classList.toggle('light-mode');
+    localStorage.setItem('cg_light_mode', esModoClaro ? '1' : '0');
+    actualizarTextoDarkToggle();
+}
+
+function actualizarTextoDarkToggle() {
+    const esModoClaro = document.body.classList.contains('light-mode');
+    document.querySelectorAll('.cg-dark-toggle').forEach(btn => {
+        btn.textContent = esModoClaro ? '🌙 Modo oscuro' : '☀️ Modo claro';
+    });
 }
 
 function aplicarDarkModeGuardado() {
-    if (localStorage.getItem('cg_dark_mode') === '1') {
-        document.body.classList.add('dark-mode');
+    if (localStorage.getItem('cg_light_mode') === '1') {
+        document.body.classList.add('light-mode');
     }
+    // setTimeout 0 para esperar a que el sidebar renderice el botón antes de cambiar su texto
+    setTimeout(actualizarTextoDarkToggle, 0);
 }
 
-// Aplicar modo oscuro al cargar cualquier página
+// Aplicar preferencia guardada al cargar cualquier página
 aplicarDarkModeGuardado();

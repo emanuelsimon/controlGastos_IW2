@@ -1,33 +1,11 @@
+/* Tabla de usuarios del asesor — usa el sistema de diseño global */
+
 main {
     padding: 2rem;
 }
 
-.card {
-    max-width: 900px;
-    margin: 2rem auto; /* Primero se centra verticalmente y luego se ajusta horizontalmente */
-}
-
-.filters {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem; 
-}
-
-.filter-btn {
-    padding: 0.4rem 1rem;
-    border: 1px solid #447799;
-    border-radius: 20px;
-    background-color: white;
-    color: #447799;
-    cursor: pointer;
-    font-size: 0.9rem;
-    width: auto;
-}
-
-.filter-btn.active {
-    background-color: #447799;
-    color: white;
+.cg-users-table-wrapper {
+    overflow-x: auto;
 }
 
 table {
@@ -35,18 +13,22 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
-    padding: 0.8rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-}
-
 th {
-    background-color: #f8f9fa;
-    color: #555;
-    font-size: 0.9rem;
+    text-align: left;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 10px 8px;
+    border-bottom: 1px solid var(--border);
 }
 
-tr:hover {
-    background-color: #f0f2f5;
+td {
+    padding: 12px 8px;
+    font-size: 14px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-light);
+}
+
+tr:hover td {
+    background-color: var(--bg-surface);
 }

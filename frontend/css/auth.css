@@ -1,40 +1,6 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f2f5;
-    font-family: Arial, sans-serif;
-}
+/* auth.css — Login y registro */
+/* El layout base (cg-wrap, cg-card, cg-btn, etc.) está en styles.css */
 
-.card {
-    max-width: 400px;
-}
-
-button {
-    width: 100%;
-    padding: 0.8rem;
-    color: rgb(8, 7, 121);
-    background-color: #447799;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-h1 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: #1a1a2e;
-}
-
-p {
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
-}
-
-input, select {
-    border: 1px solid #ccc;
-    padding: 0.7rem 1rem;
+.cg-auth-logo {
+    margin-bottom: 2rem;
 }
