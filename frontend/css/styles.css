@@ -643,3 +643,104 @@ body.dark-mode {
 .cg-queue-status.ok    { color: #2ecc71; }
 .cg-queue-status.error { color: #ef4444; }
 .cg-queue-status.wait  { color: #64748b; }
+
+
+/* =====================
+   CLASES DE UTILIDAD
+   (reemplazan estilos inline)
+   ===================== */
+
+/* Textos de estado / placeholder */
+.cg-loading {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Contenedores con ancho máximo */
+.cg-form-container       { max-width: 500px; }
+.cg-form-container-wide  { max-width: 600px; }
+
+/* Espaciado de secciones */
+.cg-section-top    { margin-top: 1.5rem; }
+.cg-section-bottom { margin-bottom: 1.5rem; }
+
+/* Títulos de sección */
+.cg-section-title {
+    font-size: 16px;
+    color: #f1f5f9;
+    margin-bottom: 1rem;
+}
+
+/* Subtítulo dentro de sección */
+.cg-section-subtitle {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+}
+
+/* Descripción pequeña */
+.cg-section-desc {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+/* Presupuesto: box de configuración */
+.cg-budget-box {
+    max-width: 480px;
+    margin-bottom: 1.5rem;
+}
+
+.cg-budget-box h2 {
+    margin-bottom: 1rem;
+}
+
+/* Dashboard: contenedores de perfil y meta */
+.cg-dashboard-section {
+    margin-top: 1.5rem;
+}
+
+/* Upload: sección de carga múltiple */
+.cg-multi-section {
+    margin-top: 2rem;
+}
+
+/* Upload: input de archivo múltiple */
+.cg-multi-file-input {
+    font-size: 13px;
+    color: #94a3b8;
+    background: #0f1623;
+    border: 0.5px solid #2e3a52;
+    border-radius: 8px;
+    padding: 8px;
+    width: 100%;
+}
+
+/* Textarea de recomendación */
+.cg-textarea {
+    width: 100%;
+    background: #0f1623;
+    border: 0.5px solid #2e3a52;
+    border-radius: 8px;
+    padding: 10px;
+    color: #f1f5f9;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+}
+
+/* Asterisco de campo obligatorio */
+.cg-required { color: #e74c3c; }
+
+/* Label secundario (ej: "opcional") */
+.cg-label-hint {
+    color: #64748b;
+    font-size: 11px;
+}
+
+/* Cards container del asesor con margen */
+.cg-cards-top { margin-top: 1.5rem; }
+
+/* Reports: boxes con margen entre sí */
+.cg-chart-box-top    { margin-top: 1.5rem; }
+.cg-chart-box-bottom { margin-bottom: 1.5rem; }

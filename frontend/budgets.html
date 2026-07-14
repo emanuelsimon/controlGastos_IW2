@@ -14,22 +14,22 @@
             <p class="cg-subtitle">Controlá cuánto querés gastar por categoría</p>
 
             <!-- Presupuesto mensual general -->
-            <div class="cg-chart-box" style="max-width:480px;margin-bottom:1.5rem">
-                <h2 style="margin-bottom:1rem">Presupuesto mensual total</h2>
+            <div class="cg-chart-box cg-budget-box">
+                <h2>Presupuesto mensual total</h2>
                 <div class="cg-field">
                     <label>Límite mensual ($)</label>
                     <input type="number" id="input-presupuesto-total" placeholder="Ej: 150000">
                 </div>
-                <!-- Punto 5 — Meta de ahorro -->
+                <!-- Meta de ahorro -->
                 <div class="cg-field">
                     <label>Meta de ahorro mensual ($)</label>
                     <input type="number" id="input-meta-ahorro" placeholder="Ej: 50000">
                 </div>
-                <button class="cg-btn" style="margin-top:0.5rem" onclick="guardarPresupuestoGeneral()">Guardar</button>
+                <button class="cg-btn" onclick="guardarPresupuestoGeneral()">Guardar</button>
             </div>
 
             <!-- Presupuestos por categoría -->
-            <h2 style="font-size:16px;color:#f1f5f9;margin-bottom:1rem">Por categoría</h2>
+            <h2 class="cg-section-title">Por categoría</h2>
             <div id="budgets-grid" class="cg-budget-grid"></div>
         </main>
     </div>

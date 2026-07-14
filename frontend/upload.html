@@ -31,15 +31,15 @@
                     </div>
                     <img id="preview-img"
                         style="display:none; width:100%; margin-top:1rem; border-radius:12px; border: 0.5px solid #2e3a52">
-                    <button class="cg-btn" id="procesar-btn" style="margin-top:1rem">✨ Procesar con IA</button>
+                    <button class="cg-btn" id="procesar-btn">✨ Procesar con IA</button>
 
                     <!-- Carga múltiple -->
-                    <div style="margin-top:2rem">
-                        <h3 style="font-size:14px;color:#94a3b8;margin-bottom:8px">📂 Carga múltiple de tickets</h3>
-                        <p style="font-size:12px;color:#64748b;margin-bottom:10px">Seleccioná varias imágenes para
+                    <div class="cg-multi-section">
+                        <h3 class="cg-section-subtitle">📂 Carga múltiple de tickets</h3>
+                        <p class="cg-section-desc">Seleccioná varias imágenes para
                             procesarlas automáticamente.</p>
                         <input type="file" id="multi-ticket-input" accept="image/*" multiple
-                            style="font-size:13px;color:#94a3b8;background:#0f1623;border:0.5px solid #2e3a52;border-radius:8px;padding:8px;width:100%">
+                            class="cg-multi-file-input">
                         <div id="multi-queue" class="cg-multi-queue"></div>
                     </div>
                 </div>
@@ -53,20 +53,20 @@
                         <form id="expense-form">
                             <div class="cg-row">
                                 <div class="cg-field">
-                                    <label>Fecha <span style="color: #e74c3c">*</span></label>
+                                    <label>Fecha <span class="cg-required">*</span></label>
                                     <input type="date" id="fecha">
                                 </div>
                                 <div class="cg-field">
-                                    <label>Monto <span style="color: #e74c3c">*</span></label>
+                                    <label>Monto <span class="cg-required">*</span></label>
                                     <input type="text" id="monto" placeholder="$0.00">
                                 </div>
                             </div>
                             <div class="cg-field">
-                                <label>Comercio <span style="color: #e74c3c">*</span></label>
+                                <label>Comercio <span class="cg-required">*</span></label>
                                 <input type="text" id="comercio" placeholder="Nombre del comercio">
                             </div>
                             <div class="cg-field">
-                                <label>Categoría <span style="color: #e74c3c">*</span></label>
+                                <label>Categoría <span class="cg-required">*</span></label>
                                 <select id="categoria">
                                     <option value="">-- Seleccioná una categoría --</option>
                                     <option value="Alimentación">Alimentación</option>
