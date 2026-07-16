@@ -3,25 +3,36 @@
 
 const loginForm = document.getElementById("login-form")
 if (loginForm) {
+    // Ocultar el mensaje de error cuando el usuario modifica los campos
+    loginForm.querySelectorAll('input').forEach(input => {
+        input.addEventListener('input', () => {
+            const errorEl = document.getElementById("login-error")
+            if (errorEl) errorEl.style.display = "none"
+        })
+    })
+
     loginForm.addEventListener("submit", async function(event) {
         event.preventDefault()
         let email = document.getElementById("email").value
         let password = document.getElementById("password").value
-
-        const data = await loginUser(email, password)
-        console.log(data)
         
-        if (data.token) {
-            localStorage.setItem("token", data.token)
-            localStorage.setItem("user", JSON.stringify(data.user))
+        const errorEl = document.getElementById("login-error")
 
-            if (data.user.rol === "asesor") {
-                window.location.href = "advisor/dashboard.html";
-            } else {
-                window.location.href = "dashboard.html";
+        try {
+            const data = await loginUser(email, password)
+
+            if (data.token) {
+                localStorage.setItem("token", data.token)
+                localStorage.setItem("user", JSON.stringify(data.user))
+
+                if (data.user.rol === "asesor") {
+                    window.location.href = "advisor/dashboard.html";
+                } else {
+                    window.location.href = "dashboard.html";
+                }
             }
-        } else {
-            alert("Email o contraseña incorrectos")
+        } catch (error) {
+            if (errorEl) errorEl.style.display = "block"
         }
     })
 }
