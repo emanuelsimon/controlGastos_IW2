@@ -229,3 +229,11 @@ async function getAllExpenses() {
     const data = await response.json();
     return data.data || [];
 }
+
+// Obtener recomendaciones de un usuario específico (para el asesor)
+async function getRecommendationsByUser(userId) {
+    const response = await fetch(`${API_URL}/recommendations?userId=${userId}`, {
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+    })
+    return response.json()
+}
