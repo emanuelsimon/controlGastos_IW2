@@ -26,9 +26,7 @@ async function cargarHistorial() {
         recs.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
 
         contenedor.innerHTML = recs.map(r => {
-            const fecha = new Date(r.fecha).toLocaleDateString('es-AR', {
-                day: '2-digit', month: 'long', year: 'numeric'
-            })
+            const fecha = r.fecha.split('T')[0].split('-').reverse().join('/') // Formatear fecha
             return `
                 <div style="padding: 12px 0; border-bottom: 0.5px solid var(--border-light);">
                     <p style="font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">${r.mensaje}</p>

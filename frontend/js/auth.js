@@ -66,7 +66,7 @@ if (registerForm) {
             alert("Cuenta creada correctamente")
             window.location.href = "index.html"
         } catch (error) {
-            alert("Error al registrarse: " + error.message)
+            alert(error.message || "Error al registrarse. Revisá los datos e intentá de nuevo.")
         }
     })
 }

@@ -94,7 +94,7 @@ function renderTablaFiltrada(gastos) {
             <tr>
                 <td>${g.comercio}</td>
                 <td>${g.categoria}</td>
-                <td>${new Date(g.fecha).toLocaleDateString('es-AR')}</td>
+                <td>${g.fecha.split('T')[0].split('-').reverse().join('/')}</td>
                 <td>$${Number(g.monto).toLocaleString('es-AR')}${anomalo ? '<span class="cg-badge-anomalo">⚠️ inusual</span>' : ''}</td>
                 <td>
                     <button class="cg-filter" onclick="eliminarGasto(${g.id})">Eliminar</button>
@@ -121,7 +121,7 @@ function exportarCSV() {
     if (!gastos.length) { alert('No hay gastos para exportar'); return; }
     const cabecera = ['Comercio', 'Categoría', 'Fecha', 'Monto', 'Descripción'].join(',');
     const filas = gastos.map(g =>
-        [`"${g.comercio}"`, `"${g.categoria}"`, new Date(g.fecha).toLocaleDateString('es-AR'), g.monto, `"${g.descripcion || ''}"`].join(',')
+        [`"${g.comercio}"`, `"${g.categoria}"`, g.fecha.split('T')[0].split('-').reverse().join('/'), g.monto, `"${g.descripcion || ''}"`].join(',')
     );// g es cada gasto, y se mapea a un array de strings, cada uno representando una fila en el CSV, los dosp 
     const csv = [cabecera, ...filas].join('\n'); //Operador spread para unir la cabecera con las filas, y luego se une todo con saltos de línea
     descargarArchivo(csv, 'gastos.csv', 'text/csv'); 

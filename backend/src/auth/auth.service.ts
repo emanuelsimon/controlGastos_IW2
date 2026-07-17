@@ -14,17 +14,34 @@ export class AuthService {
   // El método register primero verifica si el email ya está registrado, si es así, lanza una excepción de conflicto. 
   // Luego, genera un hash de la contraseña utilizando bcrypt y crea un nuevo usuario en la base de datos. Finalmente, devuelve un mensaje de éxito.
   async register(nombre: string, apellido: string, dni: string, email: string, password: string, rol: string) {
-    const existingUser = await this.usersService.findByEmail(email);
+    const emailNormalizado = email.toLowerCase();
+    
+    const existingUser = await this.usersService.findByEmail(emailNormalizado);
     if (existingUser) {
       throw new ConflictException('El email ya está registrado');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    try {
     const user = await this.usersService.create({
-      nombre, apellido, dni, email,
+      nombre, apellido, dni, email: emailNormalizado,
       password: hashedPassword,
       rol,
     });
+
+    } catch (error: any) {
+      // `error` may be unknown, narrow to `any` to access DB error properties
+      if (error && error.code === '23505') { // Código de error de violación de restricción única en PostgreSQL
+        if (error.detail?.includes('dni')) {
+            throw new ConflictException('El DNI ya está registrado');
+        }
+        if (error.detail?.includes('email')) {
+            throw new ConflictException('El email ya está registrado');
+        }
+        throw new ConflictException('Ya existe una cuenta con esos datos');
+      }
+      throw error; // Re-lanzar el error si no es un error de violación de restricción única
+    }
 
     return { message: 'Usuario registrado correctamente' };
   }

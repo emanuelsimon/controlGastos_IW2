@@ -27,7 +27,7 @@ let UsersService = class UsersService {
         return this.usersRepository.save(user);
     }
     async findByEmail(email) {
-        return this.usersRepository.findOne({ where: { email } });
+        return this.usersRepository.findOne({ where: { email: email.toLowerCase() } });
     }
     async findAll(page = 1, limit = 15) {
         const [data, total] = await this.usersRepository.findAndCount({

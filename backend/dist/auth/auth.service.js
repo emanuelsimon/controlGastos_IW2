@@ -55,16 +55,31 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async register(nombre, apellido, dni, email, password, rol) {
-        const existingUser = await this.usersService.findByEmail(email);
+        const emailNormalizado = email.toLowerCase();
+        const existingUser = await this.usersService.findByEmail(emailNormalizado);
         if (existingUser) {
             throw new common_1.ConflictException('El email ya está registrado');
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await this.usersService.create({
-            nombre, apellido, dni, email,
-            password: hashedPassword,
-            rol,
-        });
+        try {
+            const user = await this.usersService.create({
+                nombre, apellido, dni, email: emailNormalizado,
+                password: hashedPassword,
+                rol,
+            });
+        }
+        catch (error) {
+            if (error && error.code === '23505') {
+                if (error.detail?.includes('dni')) {
+                    throw new common_1.ConflictException('El DNI ya está registrado');
+                }
+                if (error.detail?.includes('email')) {
+                    throw new common_1.ConflictException('El email ya está registrado');
+                }
+                throw new common_1.ConflictException('Ya existe una cuenta con esos datos');
+            }
+            throw error;
+        }
         return { message: 'Usuario registrado correctamente' };
     }
     async login(email, password) {

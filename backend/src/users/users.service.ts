@@ -24,7 +24,7 @@ export class UsersService {
   //FindByEmail: Método encargado de buscar un usuario por su email,
   // esto nos va a servir para el proceso de autenticación, para verificar si el email existe en la base de datos
   async findByEmail(email: string): Promise<User | null> {
-    return this.usersRepository.findOne({ where: { email } });
+    return this.usersRepository.findOne({ where: { email: email.toLowerCase() } });
   }
 
   //FindAll: Método encargado de obtener todos los usuarios de la base de datos, con paginación, 
