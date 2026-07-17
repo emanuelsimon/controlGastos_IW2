@@ -19,7 +19,7 @@
     font-weight: 500;
     color: var(--text-secondary);
     margin-bottom: 10px;
-    text-transform: uppercase;
+    text-transform: none;
     letter-spacing: 0.5px;
 }
 

@@ -1,4 +1,5 @@
-import { Controller, Get, Query, Param, UseGuards, Request, ForbiddenException, Put, Body } from '@nestjs/common';
+import { Controller, Get, Query, Param, UseGuards, Request, ForbiddenException, Put, Body, UnauthorizedException } from '@nestjs/common';
+import { CurrentUser } from '../auth/current-user.decorator';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt.guard';
 import { RolesGuard } from '../auth/roles.guard';
@@ -32,7 +33,15 @@ export class UsersController {
   }
 
   @Put(':id')
-  async updateProfile(@Param('id') id: number, @Body() body: Partial<User>) {
+  async updateProfile(
+    @CurrentUser() user: any,
+    @Param('id') id: number,
+    @Body() body: Partial<User>
+  ) {
+    // Solo el propio usuario o un asesor pueden actualizar el perfil
+    if (user.rol !== 'asesor' && user.userId !== Number(id)) {
+      throw new ForbiddenException('No tenés permiso para modificar este perfil')
+    }
     return this.usersService.updateProfile(id, body)
   }
 }

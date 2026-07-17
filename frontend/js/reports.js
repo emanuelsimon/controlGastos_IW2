@@ -83,7 +83,7 @@ function renderComparacion(meses) {
                 <div class="value">$${Number(anterior).toLocaleString('es-AR')}</div>
             </div>
             <div class="cg-comparison-stat">
-                <div class="label">${labels[n - 1]} (este mes)</div>
+                <div class="label">${labels[n - 1]}</div>
                 <div class="value">$${Number(actual).toLocaleString('es-AR')}</div>
                 <div class="${diffClass}">${diffText}</div>
             </div>

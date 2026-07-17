@@ -49,8 +49,18 @@ export class ExpensesController {
   }
 
 
+  // GET /expenses/all?page=1 → todos los gastos (asesor)
+  // Se declara ANTES de @Get(':id') para que NestJS no interprete "all" como un id
+  @Get('all') // Traer todos los gastos (solo para asesores)
+  @Roles('asesor')
+  async getAllExpenses(
+    @Query('page') page: number = 1
+  ) {
+    return this.expensesService.findAll(page)
+  }
+
   // GET /expenses?page=1 → gastos del usuario logueado
-  @Get()
+  @Get() // Traer los gastos del usuario logueado (o de otro usuario si es asesor)
   async getMyExpenses(
     @CurrentUser() user: any,
     @Query('page') page: number = 1,
@@ -61,15 +71,6 @@ export class ExpensesController {
       throw new ForbiddenException('No tienes permiso para acceder a estos gastos');
     }
     return this.expensesService.findByUser(userId, page)
-  }
-
-  // GET /expenses/all?page=1 → todos los gastos (asesor)
-  @Get('all')
-  @Roles('asesor')
-  async getAllExpenses(
-    @Query('page') page: number = 1
-  ) {
-    return this.expensesService.findAll(page)
   }
 
   // POST /expenses → crear un gasto
