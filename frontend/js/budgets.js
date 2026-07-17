@@ -19,7 +19,8 @@ function guardarPresupuestoGeneral() {
 }
 
 async function cargarPresupuestos() {
-    const gastos = await getExpenses();
+    const resultado = await getExpenses();
+    const gastos = resultado.data;
     const ahora  = new Date();
 
     // Filtrar gastos del mes actual

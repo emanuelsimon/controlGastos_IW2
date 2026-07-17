@@ -8,11 +8,12 @@ async function cargarRecomendaciones() {
     const contenedor = document.getElementById('recommendations-list');
 
     try {
-        // Punto 18 — Historial de recomendaciones del asesor
+        // Historial de recomendaciones del asesor
         const recs = await getRecommendations();
 
-        // Punto 17 — Recomendaciones automáticas basadas en patrones
-        const gastos = await getExpenses();
+        // Recomendaciones automáticas basadas en patrones
+        const resultado = await getExpenses();
+        const gastos = resultado.data;
         const recsAutomaticas = generarRecomendacionesAutomaticas(gastos);
 
         let html = '';
@@ -50,7 +51,7 @@ async function cargarRecomendaciones() {
     }
 }
 
-// Punto 17 — Lógica de recomendaciones automáticas basadas en los gastos del usuario
+// Lógica de recomendaciones automáticas basadas en los gastos del usuario
 function generarRecomendacionesAutomaticas(gastos) {
     if (!gastos || gastos.length === 0) return [];
 

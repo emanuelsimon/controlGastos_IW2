@@ -14,7 +14,8 @@ if (user && user.rol === 'asesor') {
 // Perfil financiero y Meta de ahorro
 async function cargarDashboard() {
     try {
-        const gastos = await getExpenses();
+        const resultado = await getExpenses();
+        const gastos = resultado.data;
 
         // Perfil financiero
         const perfil = calcularPerfilFinanciero(gastos);
