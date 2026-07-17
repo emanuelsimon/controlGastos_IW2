@@ -41,8 +41,6 @@ let ExpensesController = class ExpensesController {
             updateData.categoria = updateExpenseDto.categoria;
         if (updateExpenseDto.descripcion)
             updateData.descripcion = updateExpenseDto.descripcion;
-        if (updateExpenseDto.imagen)
-            updateData.imagen = updateExpenseDto.imagen;
         return this.expensesService.update(id, updateData);
     }
     async remove(user, id) {
