@@ -29,7 +29,6 @@ export class ExpensesController {
     if (updateExpenseDto.monto) updateData.monto = updateExpenseDto.monto;
     if (updateExpenseDto.categoria) updateData.categoria = updateExpenseDto.categoria;
     if (updateExpenseDto.descripcion) updateData.descripcion = updateExpenseDto.descripcion;
-    if (updateExpenseDto.imagen) updateData.imagen = updateExpenseDto.imagen;
 
     return this.expensesService.update(id, updateData)
   }
@@ -90,9 +89,25 @@ export class ExpensesController {
       monto: createExpenseDto.monto,
       categoria: createExpenseDto.categoria,
       descripcion: createExpenseDto.descripcion,
-      imagen: createExpenseDto.imagen,
       user: { id: createExpenseDto.userId } as any
     })
+  }
+
+  // GET /expenses/reportes → los tres reportes en una sola llamada
+  @Get('reportes')
+  async getReportes(
+    @CurrentUser() user: any,
+    @Query('userId') userId: number
+  ) {
+    if (user.rol !== 'asesor' && user.userId !== userId) {
+      throw new ForbiddenException('No tienes permiso para acceder a estos reportes');
+    }
+    const [categorias, meses, comercios] = await Promise.all([
+      this.expensesService.getReportesCategorias(userId),
+      this.expensesService.getReportesMeses(userId),
+      this.expensesService.getReportesComercios(userId),
+    ])
+    return { categorias, meses, comercios }
   }
 
   @Get('reportes/categorias')

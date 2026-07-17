@@ -58,7 +58,7 @@ async function procesarTicket(base64Image) {
 
 
 //El fetch a la ruta /expenses del backend devuelve un objeto 
-// con una propiedad "data" que contiene el array de gastos.
+// con una propiedad "data" que contiene el array de gastos y "total" con el total de registros.
 
 //Función para obtener los gastos del usuario logueado, pasando el userId como parámetro en la URL. 
 async function getExpenses(page = 1) 
@@ -69,8 +69,7 @@ async function getExpenses(page = 1)
             "Authorization": `Bearer ${localStorage.getItem("token")}` 
         }
     })
-    const data = await response.json()
-    return data.data // Retornamos solo la propiedad "data" del objeto devuelto por el backend, que contiene el array de gastos.
+    return response.json() // Retornamos { data: [...], total: N } para que el llamador pueda paginar.
 }
 
 
@@ -109,18 +108,12 @@ async function getUserExpenses(userId, page = 1) {
 async function getReportsData() {
     const user = JSON.parse(localStorage.getItem("user"))
     const headers = { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-
-    const [categorias, meses, comercios] = await Promise.all([
-        fetch(`${API_URL}/expenses/reportes/categorias?userId=${user.id}`, { headers }).then(r => r.json()),
-        fetch(`${API_URL}/expenses/reportes/meses?userId=${user.id}`, { headers }).then(r => r.json()),
-        fetch(`${API_URL}/expenses/reportes/comercios?userId=${user.id}`, { headers }).then(r => r.json()),
-    ])
-
-    return { categorias, meses, comercios }
+    const response = await fetch(`${API_URL}/expenses/reportes?userId=${user.id}`, { headers })
+    return response.json()
 }
 
 //Función para crear un nuevo gasto, enviando los datos al backend a través de una solicitud POST a la ruta /expenses.
-async function createExpense(comercio, fecha, monto, categoria, descripcion, imagen) {
+async function createExpense(comercio, fecha, monto, categoria, descripcion) {
     const user = JSON.parse(localStorage.getItem("user"))
     const response = await fetch(`${API_URL}/expenses`, {
         method: "POST",
@@ -134,7 +127,6 @@ async function createExpense(comercio, fecha, monto, categoria, descripcion, ima
             monto: parseFloat(monto),
             categoria,
             descripcion,
-            imagen,
             userId: user.id
         })
     })

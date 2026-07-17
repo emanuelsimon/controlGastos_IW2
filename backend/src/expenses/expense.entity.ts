@@ -23,9 +23,6 @@ export class Expense {
     @Column({ nullable: true })
     descripcion!: string;
 
-    @Column({ nullable: true })
-    imagen!: string;
-
     @ManyToOne(() => User, user => user.expenses)
     user!: User;
 }

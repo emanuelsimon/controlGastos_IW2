@@ -4,13 +4,35 @@ cargarSidebarUsuario();
 
 verificarToken();
 
-let todosLosGastos = []; // Variable global que contiene todos los gastos cargados desde la API
+const LIMITE_POR_PAGINA = 15;
+let todosLosGastos = [];
+let paginaActual = 1;
+let totalGastos = 0;
 
-async function inicializar() {
-    todosLosGastos = await getExpenses();
+async function inicializar(pagina = 1) {
+    paginaActual = pagina;
+    const resultado = await getExpenses(pagina);
+    todosLosGastos = resultado.data;
+    totalGastos = resultado.total;
+
     verificarAlertas(todosLosGastos);
     renderTablaFiltrada(todosLosGastos);
     inicializarFiltros();
+    renderPaginacion();
+}
+
+function renderPaginacion() {
+    const contenedor = document.getElementById('pagination');
+    if (!contenedor) return;
+
+    const totalPaginas = Math.ceil(totalGastos / LIMITE_POR_PAGINA);
+    if (totalPaginas <= 1) { contenedor.innerHTML = ''; return; }
+
+    let html = '';
+    for (let i = 1; i <= totalPaginas; i++) {
+        html += `<button class="cg-page-btn ${i === paginaActual ? 'active' : ''}" onclick="inicializar(${i})">${i}</button>`;
+    }
+    contenedor.innerHTML = html;
 }
 
 // Alerta de presupuesto mensual

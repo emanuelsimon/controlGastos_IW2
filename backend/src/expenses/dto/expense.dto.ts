@@ -3,30 +3,26 @@ import { IsString, IsNumber, IsDateString, IsOptional, Min, MaxLength } from 'cl
 export class CreateExpenseDto {
   @IsString()
   @MaxLength(100, { message: 'El comercio no puede exceder 100 caracteres' })
-  comercio: string;
+  comercio!: string;
 
   @IsDateString({}, { message: 'La fecha debe ser válida (formato: YYYY-MM-DD)' })
-  fecha: string;
+  fecha!: string;
 
   @IsNumber()
   @Min(0.01, { message: 'El monto debe ser mayor a 0' })
-  monto: number;
+  monto!: number;
 
   @IsString()
   @MaxLength(50, { message: 'La categoría no puede exceder 50 caracteres' })
-  categoria: string;
+  categoria!: string;
 
   @IsOptional()
   @IsString()
   @MaxLength(500, { message: 'La descripción no puede exceder 500 caracteres' })
   descripcion?: string;
 
-  @IsOptional()
-  @IsString()
-  imagen?: string;
-
   @IsNumber()
-  userId: number;
+  userId!: number;
 }
 
 export class UpdateExpenseDto {
@@ -53,8 +49,4 @@ export class UpdateExpenseDto {
   @IsString()
   @MaxLength(500)
   descripcion?: string;
-
-  @IsOptional()
-  @IsString()
-  imagen?: string;
 }

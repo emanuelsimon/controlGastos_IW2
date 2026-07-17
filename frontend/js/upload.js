@@ -19,7 +19,7 @@ document.getElementById('expense-form').addEventListener('submit', async functio
     }
 
     try {
-        await createExpense(comercio, fecha, monto, categoria, descripcion, null);
+        await createExpense(comercio, fecha, monto, categoria, descripcion);
         alert('Gasto guardado correctamente');
         window.location.href = 'expenses.html';
     } catch (error) {
@@ -146,8 +146,7 @@ if (multiInput) {
                         resultado.fecha || new Date().toISOString().split('T')[0],
                         parseFloat(resultado.monto),
                         cat,
-                        `Carga múltiple: ${archivos[i].name}`,
-                        null
+                        `Carga múltiple: ${archivos[i].name}`
                     );
                     statusEl.textContent = '✅ Guardado';
                     statusEl.className = 'cg-queue-status ok';

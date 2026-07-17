@@ -109,11 +109,5 @@ export class ExpensesService {
   async remove(id: number): Promise<void> {
     await this.expensesRepository.delete(id)
   }
-  
-/*
-  async findById(id: number): Promise<Expense | null> {
-    return this.expensesRepository.findOne({ where: { id } })
-  }
-    */
 
 }
