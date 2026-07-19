@@ -22,7 +22,7 @@ let AuthController = class AuthController {
         this.authService = authService;
     }
     async register(registerDto) {
-        return this.authService.register(registerDto.nombre, registerDto.apellido, registerDto.dni, registerDto.email, registerDto.password, registerDto.rol);
+        return this.authService.register(registerDto);
     }
     async login(loginDto) {
         return this.authService.login(loginDto.email, loginDto.password);

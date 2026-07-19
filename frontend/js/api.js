@@ -7,13 +7,16 @@
  */
 
 /** Función para iniciar sesión */
+// Convierte la respuesta del backend en un objeto JSON y lo retorna. 
+// Si la respuesta no es ok, lanza un error con el mensaje del backend.
 async function loginUser(email, password) {
     const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password }), 
+        // Convertimos el objeto JavaScript en una cadena JSON para enviarla al backend.
     });
 
     if (!response.ok) {

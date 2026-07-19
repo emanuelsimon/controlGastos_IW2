@@ -5,8 +5,9 @@ import { Expense } from '../expenses/expense.entity';
 export class User {
   @PrimaryGeneratedColumn()
   id!: number;
-  //Con el signo "!" le decimos a TypeScript que estas propiedades van a ser inicializadas, aunque no lo parezca,
-  // esto es porque TypeORM se encarga de inicializarlas cuando se crean las tablas en la base de datos
+  //Con el signo "!" le decimos a TypeScript que estas propiedades van a ser inicializadas, 
+  // aunque no lo parezca, esto es porque TypeORM se encarga de inicializarlas 
+  // cuando se crean las tablas en la base de datos
 
   @Column()
   nombre!: string;

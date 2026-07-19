@@ -4,18 +4,16 @@ import { LoginDto, RegisterDto } from './dto/auth.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
 
+  // Inyectamos el servicio de autenticación para poder usar sus métodos en el controlador 
+  constructor(private authService: AuthService) {} 
+
+  // Método que recibe un objeto RegisterDto con los datos del usuario a registrar y 
+  // llama al método register del AuthService para crear el usuario y devolver el token JWT.
   @Post('register')
-  async register(@Body() registerDto: RegisterDto) {
-    return this.authService.register(
-      registerDto.nombre,
-      registerDto.apellido,
-      registerDto.dni,
-      registerDto.email,
-      registerDto.password,
-      registerDto.rol,
-    );
+  async register(@Body() registerDto: RegisterDto)
+  {
+    return this.authService.register(registerDto);
   }
 
   @Post('login')

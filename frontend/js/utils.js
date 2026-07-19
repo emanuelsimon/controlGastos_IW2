@@ -143,7 +143,7 @@ function inicializarTabla(getData, renderFila, filtros) {
    ===================================================== */
 
 /**
- * Punto 1 — Categorización automática por nombre de comercio.
+ * Categorización automática por nombre de comercio.
  * Devuelve la categoría más probable o null si no hay match.
  */
 function categorizarPorComercio(comercio) {

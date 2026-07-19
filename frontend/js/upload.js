@@ -4,7 +4,7 @@ cargarSidebarUsuario();
 
 verificarToken();
 
-// Punto 13 — Guardar gasto desde el formulario (flujo normal y post-IA)
+// Guardar gasto desde el formulario (flujo normal y post-IA)
 document.getElementById('expense-form').addEventListener('submit', async function (e) {
     e.preventDefault();
     const comercio = document.getElementById('comercio').value;
@@ -27,7 +27,7 @@ document.getElementById('expense-form').addEventListener('submit', async functio
     }
 });
 
-// Punto 13 — Procesar ticket con IA y pre-completar formulario
+// Procesar ticket con IA y pre-completar formulario
 document.getElementById('procesar-btn').addEventListener('click', function () {
     const fileInput = document.getElementById('ticket-image');
     const file = fileInput.files[0];
@@ -46,7 +46,7 @@ document.getElementById('procesar-btn').addEventListener('click', function () {
             if (resultado.comercio) {
                 document.getElementById('comercio').value = resultado.comercio;
 
-                // Punto 1 — Categorización automática por comercio
+                //Categorización automática por comercio
                 const categoriaDetectada = categorizarPorComercio(resultado.comercio);
                 if (categoriaDetectada && !resultado.categoria) {
                     const select = document.getElementById('categoria');
@@ -77,7 +77,7 @@ document.getElementById('procesar-btn').addEventListener('click', function () {
     };
 });
 
-// Punto 1 — Categorizar automáticamente cuando el usuario escribe el comercio a mano
+// Categorizar automáticamente cuando el usuario escribe el comercio a mano
 document.getElementById('comercio').addEventListener('blur', function () {
     const select = document.getElementById('categoria');
     if (select.value) return; // ya tiene categoría seleccionada, no pisar

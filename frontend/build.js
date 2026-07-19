@@ -13,7 +13,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.API_URL; 
 
 if (!apiUrl) {
   console.error(
@@ -23,8 +23,8 @@ if (!apiUrl) {
   );
   process.exit(1);
 }
-
-const configPath = path.join(__dirname, "js", "config.js");
+// Ruta del archivo config.js a generar
+const configPath = path.join(__dirname, "js", "config.js"); 
 
 const contenido = `/**
  * config.js — generado automáticamente por build.js

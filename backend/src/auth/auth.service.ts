@@ -2,18 +2,26 @@ import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
+import { RegisterDto } from './dto/auth.dto';
 
-//Esta función se encarga de manejar la lógica de autenticación, incluyendo el registro de nuevos usuarios y el inicio de sesión.
+// Inyectamos el servicio de usuarios y el servicio de JWT para 
+// poder usar sus métodos en la clase AuthService
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) {} 
 
-  // El método register primero verifica si el email ya está registrado, si es así, lanza una excepción de conflicto. 
-  // Luego, genera un hash de la contraseña utilizando bcrypt y crea un nuevo usuario en la base de datos. Finalmente, devuelve un mensaje de éxito.
-  async register(nombre: string, apellido: string, dni: string, email: string, password: string, rol: string) {
+
+
+  // El método register primero verifica si el email ya está registrado, si es así, 
+  // lanza una excepción de conflicto. 
+  // Luego, genera un hash de la contraseña utilizando bcrypt y crea un nuevo usuario 
+  // en la base de datos. Finalmente, devuelve un mensaje de éxito.
+  async register(registerDto: RegisterDto) {
+    // Desestructuramos el objeto registerDto para obtener los datos del usuario a registrar
+    const { nombre, apellido, dni, email, password, rol } = registerDto; 
     const emailNormalizado = email.toLowerCase();
     
     const existingUser = await this.usersService.findByEmail(emailNormalizado);
