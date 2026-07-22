@@ -18,7 +18,7 @@ export class CreateExpenseDto {
 
   @IsOptional()
   @IsString()
-  @MaxLength(500, { message: 'La descripción no puede exceder 500 caracteres' })
+  @MaxLength(500, { message: 'La descripción no puede exceder 500 caracteres' }) // Si tiene mas de 500 caracteres, se corta y se guarda solo los primeros 500
   descripcion?: string;
 
   @IsNumber()

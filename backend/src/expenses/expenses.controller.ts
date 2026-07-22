@@ -83,7 +83,7 @@ export class ExpensesController {
       throw new ForbiddenException('No tienes permiso para crear gastos para otro usuario');
     }
 
-    return this.expensesService.create({
+    return this.expensesService.create({ // Retorna un objeto JavaScript con los datos del gasto creado en la base de datos: comercio, fecha, monto, categoria, descripcion y userId.
       comercio: createExpenseDto.comercio,
       fecha: new Date(createExpenseDto.fecha),
       monto: createExpenseDto.monto,

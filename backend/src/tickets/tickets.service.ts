@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class TicketsService {
-    constructor(private configService: ConfigService) { }
+    constructor(private configService: ConfigService) { } // Inyectar ConfigService para acceder a las variables de entorno OCR_SPACE_API_KEY
 
     async procesarTicket(base64Image: string) {
         const apiKey = this.configService.get('OCR_SPACE_API_KEY')!
@@ -15,7 +15,7 @@ export class TicketsService {
         formData.append('isTable', 'true')
         formData.append('OCREngine', '2')
 
-        const response = await fetch('https://api.ocr.space/parse/image', {
+        const response = await fetch('https://api.ocr.space/parse/image', { // Llamada a la API de OCR.space para procesar la imagen
             method: 'POST',
             headers: {
                 'apikey': apiKey,
@@ -30,7 +30,7 @@ export class TicketsService {
             throw new Error('Error al procesar el ticket')
         }
 
-        const texto = data.ParsedResults[0].ParsedText
+        const texto = data.ParsedResults[0].ParsedText 
         console.log('Texto extraído:', texto)
 
         const comercio = this.extraerComercio(texto)
@@ -44,16 +44,15 @@ export class TicketsService {
             monto,
             fecha,
             categoria
-        }
+        } // Retorna un objeto JavaScript con los datos extraídos del ticket: texto, comercio, monto, fecha y categoría.
     }
 
+    // Extrae el monto del ticket a partir del texto extraído por OCR.space
     private extraerMonto(texto: string): number | null {
-    // Busca TOTAL: $157,800.00 o TOTAL $157.800,00
     const patronTotalConSimbolo = /TOTAL[:\s]+\$\s*([\d,\.]+)/i
-    const matchConSimbolo = texto.match(patronTotalConSimbolo)
+    const matchConSimbolo = texto.match(patronTotalConSimbolo) // Busca "TOTAL" seguido de un símbolo de dólar y un número
     if (matchConSimbolo) {
-        const valor = matchConSimbolo[1]
-        // Formato $157,800.00 (coma=miles, punto=decimal)
+        const valor = matchConSimbolo[1] // Extrae el valor numérico después del símbolo de dólar con el formato $157,800.00 (coma=miles, punto=decimal)
         if (/,\d{3}\.\d{2}$/.test(valor)) {
             return parseFloat(valor.replace(',', ''))
         }
@@ -61,7 +60,7 @@ export class TicketsService {
         if (/\.\d{3},\d{2}$/.test(valor)) {
             return parseFloat(valor.replace('.', '').replace(',', '.'))
         }
-        return parseFloat(valor.replace(/[,$]/g, ''))
+        return parseFloat(valor.replace(/[,$]/g, '')) // Retorna el valor numérico eliminando comas y puntos si no coincide con los formatos anteriores
     }
 
     // Busca TOTAL seguido directamente de un número
@@ -114,10 +113,11 @@ export class TicketsService {
         return null
     }
 
-    private extraerComercio(texto: string): string | null {
-        const lineas = texto.split(/[\t\n\r]/)
-            .map(l => l.trim())
-            .filter(l => l.length > 4 && !/^\d/.test(l) && !/CUIT|IVA|Fecha|Hora|Caja|Oper/i.test(l))
+    // Extrae el nombre del comercio del texto del ticket, priorizando líneas con razón social o con "de" indicando nombre de persona
+    private extraerComercio(texto: string): string | null { 
+        const lineas = texto.split(/[\t\n\r]/) // Separar por tabulaciones y saltos de línea
+            .map(l => l.trim()) //mapear para quitar espacios al inicio y final
+            .filter(l => l.length > 4 && !/^\d/.test(l) && !/CUIT|IVA|Fecha|Hora|Caja|Oper/i.test(l)) // Filtrar líneas que no sean significativas
 
         // Priorizar líneas con razón social
         const conRazonSocial = lineas.find(l => /S\.R\.L|S\.A\.|SRL|SA\b/i.test(l))
@@ -134,7 +134,7 @@ export class TicketsService {
     private inferirCategoria(texto: string, comercio: string): string {
         const textoCompleto = (texto + ' ' + comercio).toUpperCase()
 
-        const categorias: { [key: string]: string[] } = {
+        const categorias: { [key: string]: string[] } = { 
             'Alimentación': ['SUPER', 'MERCADO', 'MARKET', 'ALMACEN', 'ALIMENTOS', 'CARNICERIA', 'VERDULERIA', 'PANADERIA', 'FIAMBRERIA'],
             'Combustible': ['YPF', 'SHELL', 'BP', 'AXION', 'PUMA', 'COMBUSTIBLE', 'NAFTA', 'ESTACION'],
             'Salud': ['FARMACIA', 'FARM', 'DROGUERIA', 'CLINICA', 'MEDICO', 'HOSPITAL', 'OPTICA'],
@@ -145,9 +145,9 @@ export class TicketsService {
             'Ropa': ['ROPA', 'INDUMENTARIA', 'CALZADO', 'ZAPATERIA', 'BOUTIQUE'],
             'Servicios': ['TELEFONICA', 'CLARO', 'PERSONAL', 'MOVISTAR', 'LUZ', 'GAS', 'AGUA', 'INTERNET'],
         }
-
-        for (const [categoria, palabras] of Object.entries(categorias)) {
-            if (palabras.some(p => textoCompleto.includes(p))) {
+        // Si alguna palabra clave está incluida en el texto completo, se devuelve la categoría correspondiente
+        for (const [categoria, palabras] of Object.entries(categorias)) { 
+            if (palabras.some(p => textoCompleto.includes(p))) { 
                 return categoria
             }
         }

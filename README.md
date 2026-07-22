@@ -1,44 +1,14 @@
 # CtrlGasto 💰
-Plataforma inteligente de gestión de gastos personales — Proyecto final Ingeniería Web II (UNDEF 2026)
+Plataforma inteligente de gestión de gastos personales — Proyecto final Ingeniería Web II (IUA 2026)
+
+🌐 **Frontend:** https://control-gastos-iw-2.vercel.app  
+⚙️ **Backend:** https://controlgastos-iw2.onrender.com
 
 ---
 
 ## 📋 Descripción
 
-CtrlGasto es una aplicación web que permite a los usuarios registrar y analizar sus gastos personales mediante la carga manual o por foto de ticket (con interpretación por IA). Los asesores financieros tienen un panel propio para visualizar y analizar los patrones de consumo de cada usuario.
-
----
-
-## Estado actual del proyecto
-
-### Frontend (completo)
-Interfaz web desarrollada con HTML, CSS y JavaScript puro, con diseño oscuro y moderno.
-
-**Pantallas del Usuario:**
-- Login y Registro
-- Dashboard con navegación por sidebar
-- Historial de gastos con filtros y paginado
-- Carga de gastos con drag & drop de imagen de ticket
-- Reportes con gráficos (torta, barras, ranking)
-
-**Pantallas del Asesor:**
-- Panel del asesor
-- Lista de usuarios con filtros y paginado
-- Detalle de gastos por usuario
-
-### ✅ Backend (parcialmente implementado)
-API REST desarrollada con NestJS y PostgreSQL.
-
-**Implementado:**
-- Autenticación: `POST /auth/register` y `POST /auth/login`
-- Entidad `Usuario` con TypeORM
-- Generación de tokens JWT
-- Hash de contraseñas con bcrypt
-
-**Pendiente:**
-- Endpoints CRUD de gastos
-- Integración con IA para procesamiento de tickets
-- Endpoints del asesor
+CtrlGasto es una aplicación web fullstack que permite a los usuarios registrar y analizar sus gastos personales mediante carga manual o por foto de ticket (con interpretación por IA). Los asesores financieros tienen un panel propio para visualizar estadísticas globales y analizar los patrones de consumo de cada usuario.
 
 ---
 
@@ -46,12 +16,15 @@ API REST desarrollada con NestJS y PostgreSQL.
 
 | Capa | Tecnología |
 |------|-----------|
-| Frontend | HTML, CSS, JavaScript |
-| Backend | NestJS (Node.js) |
+| Frontend | HTML, CSS, JavaScript vanilla |
+| Backend | NestJS (Node.js + TypeScript) |
 | Base de datos | PostgreSQL |
 | ORM | TypeORM |
 | Autenticación | JWT + bcrypt |
-| Gráficos | Chart.js |
+| Gráficos | Chart.js (local) |
+| IA | API de OCR |
+| Deploy frontend | Vercel |
+| Deploy backend | Render |
 
 ---
 
@@ -60,85 +33,180 @@ API REST desarrollada con NestJS y PostgreSQL.
 ```
 controlGastos_IW2/
 ├── frontend/
-│   ├── index.html              ← Login
-│   ├── register.html           ← Registro
-│   ├── dashboard.html          ← Panel usuario
-│   ├── expenses.html           ← Historial de gastos
-│   ├── upload.html             ← Carga de ticket
-│   ├── reports.html            ← Reportes y gráficos
+│   ├── index.html                  ← Login
+│   ├── register.html               ← Registro
+│   ├── dashboard.html              ← Panel principal del usuario
+│   ├── expenses.html               ← Historial de gastos con filtros y paginación
+│   ├── upload.html                 ← Carga de ticket por imagen o manual
+│   ├── reports.html                ← Reportes y gráficos
+│   ├── budgets.html                ← Presupuestos y metas de ahorro
+│   ├── recommendations.html        ← Recomendaciones del asesor + automáticas
+│   ├── profile.html                ← Perfil del usuario
+│   ├── edit-expense.html           ← Edición de gasto
 │   ├── advisor/
-│   │   ├── dashboard.html      ← Panel asesor
-│   │   ├── users.html          ← Lista de usuarios
-│   │   └── user-detail.html    ← Gastos por usuario
+│   │   ├── dashboard.html          ← Panel del asesor con estadísticas globales
+│   │   ├── users.html              ← Lista de usuarios registrados
+│   │   ├── user-detail.html        ← Gastos y detalle de un usuario
+│   │   ├── send-recommendation.html← Envío de recomendaciones + historial
+│   │   └── profile.html            ← Perfil del asesor
 │   ├── css/
-│   │   ├── styles.css          ← Estilos globales
-│   │   ├── auth.css            ← Login y registro
-│   │   ├── dashboard.css       ← Dashboard
-│   │   ├── expenses.css        ← Tabla de gastos
-│   │   ├── upload.css          ← Carga de ticket
-│   │   └── reports.css         ← Reportes
+│   │   ├── styles.css              ← Estilos globales y variables CSS (modo claro/oscuro)
+│   │   ├── auth.css
+│   │   ├── dashboard.css
+│   │   ├── expenses.css
+│   │   ├── upload.css
+│   │   ├── reports.css
+│   │   └── users.css
 │   └── js/
-│       ├── utils.js            ← Funciones reutilizables
-│       ├── api.js              ← Llamadas al backend
-│       ├── auth.js             ← Lógica de login
-│       ├── dashboard.js        ← Lógica del dashboard
-│       ├── expenses.js         ← Lógica de gastos
-│       ├── upload.js           ← Lógica de carga
-│       ├── reports.js          ← Lógica de reportes
-│       ├── users.js            ← Lógica lista usuarios
-│       ├── user-detail.js      ← Lógica detalle usuario
-│       └── advisor-dashboard.js
+│       ├── config.js               ← Define API_URL (generado por build.js en deploy)
+│       ├── api.js                  ← Todas las llamadas HTTP al backend
+│       ├── components.js           ← Sidebar reutilizable con detección de página activa
+│       ├── utils.js                ← Funciones transversales (auth, perfil financiero, etc.)
+│       ├── auth.js
+│       ├── dashboard.js
+│       ├── expenses.js
+│       ├── upload.js
+│       ├── reports.js
+│       ├── budgets.js
+│       ├── recommendations.js
+│       ├── profile.js
+│       ├── edit-expense.js
+│       ├── advisor-dashboard.js
+│       ├── advisor-profile.js
+│       ├── users.js
+│       ├── user-detail.js
+│       ├── send-recommendation.js
+│       ├── build.js                ← Script de build para Vercel (inyecta API_URL)
+│       └── vendor/
+│           └── chart.min.js        ← Chart.js descargado localmente
 └── backend/
     └── src/
-        ├── auth/               ← Módulo de autenticación
-        ├── users/              ← Módulo de usuarios
-        ├── expenses/           ← Módulo de gastos (pendiente)
-        └── app.module.ts       ← Módulo raíz
+        ├── auth/                   ← Registro, login, JWT, guards, decoradores
+        ├── expenses/               ← CRUD de gastos, reportes, paginación
+        ├── tickets/                ← Procesamiento de imágenes con IA (Anthropic)
+        ├── recommendations/        ← Creación y consulta de recomendaciones
+        ├── users/                  ← Gestión de usuarios y perfiles
+        └── common/                 ← Filtros de excepciones y middlewares
 ```
 
 ---
 
-## 🧪 Cuentas de prueba
+## ⚙️ Instalación y uso local
 
-El frontend usa datos simulados. Para probar la aplicación usar las siguientes credenciales:
-
-| Rol | Email | Contraseña |
-|-----|-------|-----------|
-| Usuario | user@mail.com | user |
-| Asesor | asesor@mail.com | asesor |
-
-> ⚠️ El backend real requiere registrarse en `POST /auth/register`. Las credenciales de prueba solo funcionan con el frontend en modo simulado.
-
----
-
-## ⚙️ Instalación y uso
-
-### Frontend
-No requiere instalación. Abrí `frontend/index.html` con Live Server (VSCode) o cualquier servidor local.
+### Requisitos previos
+- Node.js 18+
+- PostgreSQL corriendo localmente
 
 ### Backend
+
 ```bash
 cd backend
 npm install
 ```
 
-Creá un archivo `.env` en la carpeta `backend/` con:
-```
+Creá un archivo `.env` en la carpeta `backend/`:
+
+```env
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=tu_usuario
 DB_PASSWORD=tu_password
 DB_DATABASE=ctrlgasto
 JWT_SECRET=tu_clave_secreta
+OCR_SPACE_API_KEY=tu_api_key_de_ocr
 ```
 
-Luego iniciá el servidor:
+Iniciá el servidor:
+
 ```bash
 npm run start:dev
 ```
 
-El backend corre en `http://localhost:3000`
+El backend queda disponible en `http://localhost:3000`
+
+### Frontend
+
+No requiere instalación ni compilación. Abrí `frontend/index.html` con Live Server (extensión de VSCode).
+
+> `config.js` tiene un fallback automático a `http://localhost:3000` cuando se corre localmente, por lo que no hace falta configurar nada en el frontend para desarrollo.
 
 ---
 
-Benitez Emanuel - Proyecto desarrollado para la materia Ingeniería Web II — UNDEF 2026
+## 🚀 Deploy
+
+### Frontend (Vercel)
+
+1. Conectar el repositorio en [vercel.com](https://vercel.com)
+2. Configurar la carpeta raíz del proyecto como `frontend/`
+3. Agregar la variable de entorno en Settings → Environment Variables:
+   ```
+   API_URL = https://controlgastos-iw2.onrender.com
+   ```
+4. Vercel ejecuta `build.js` automáticamente antes de cada deploy, que inyecta `API_URL` en `config.js`
+
+### Backend (Render)
+
+1. Conectar el repositorio en [render.com](https://render.com)
+2. Configurar como Web Service con:
+   - **Root directory:** `backend`
+   - **Build command:** `npm install && npm run build`
+   - **Start command:** `npm run start:prod`
+3. Agregar las mismas variables de entorno del `.env` en el panel de Render
+
+---
+
+## 🔌 Endpoints de la API
+
+| Método | Ruta | Descripción | Rol |
+|--------|------|-------------|-----|
+| POST | /auth/register | Registrar usuario | — |
+| POST | /auth/login | Iniciar sesión | — |
+| GET | /expenses | Gastos del usuario (paginado) | usuario |
+| POST | /expenses | Crear gasto | usuario |
+| PUT | /expenses/:id | Editar gasto | usuario |
+| DELETE | /expenses/:id | Eliminar gasto | usuario |
+| GET | /expenses/all | Todos los gastos | asesor |
+| GET | /expenses/reportes | Reportes unificados (categoría, mes, comercio) | usuario |
+| POST | /tickets/upload | Procesar imagen de ticket con IA | usuario |
+| GET | /recommendations | Ver recomendaciones | usuario/asesor |
+| POST | /recommendations | Enviar recomendación | asesor |
+| GET | /users | Listar usuarios (paginado) | asesor |
+| GET | /users/:id | Ver perfil de usuario | usuario/asesor |
+| PUT | /users/:id | Actualizar perfil | usuario/asesor |
+
+---
+
+## 🧪 Cuentas de prueba
+
+Registrarse en `/register.html`. Para probar el rol de asesor, seleccionar "Asesor" en el campo Rol al registrarse.
+
+---
+
+## ✨ Funcionalidades implementadas
+
+**Usuario:**
+- Registro e inicio de sesión con JWT
+- Carga de gastos manual o por imagen de ticket (IA extrae comercio, monto, fecha y categoría)
+- Categorización automática por nombre de comercio
+- Historial de gastos con búsqueda avanzada (fecha, categoría, monto, comercio) y paginación
+- Exportación de gastos a CSV y JSON
+- Reportes con gráficos de torta, barras y ranking de comercios
+- Comparación de gastos entre meses
+- Análisis de patrones de consumo
+- Presupuestos mensuales por categoría con barra de progreso
+- Meta de ahorro mensual con seguimiento
+- Perfil financiero automático (ahorrador / equilibrado / impulsivo)
+- Recomendaciones automáticas basadas en patrones + recomendaciones del asesor
+- Detección de gastos anómalos (marcado visual en la tabla)
+- Alertas de presupuesto (banner cuando se supera el límite mensual)
+- Modo claro / oscuro persistente
+- Carga múltiple de tickets
+
+**Asesor:**
+- Panel con estadísticas globales (total usuarios, gastos, promedio, categoría más frecuente)
+- Lista de usuarios con detalle de gastos por usuario
+- Envío de recomendaciones personalizadas con historial
+
+---
+
+Benítez Emanuel — Ingeniería Web II — IUA 2026

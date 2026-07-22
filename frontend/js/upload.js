@@ -33,22 +33,22 @@ document.getElementById('procesar-btn').addEventListener('click', function () {
     const file = fileInput.files[0];
     if (!file) { alert('Por favor seleccioná una imagen'); return; }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = async function () {
+    const reader = new FileReader(); // Leer archivo como base64 para enviarlo al backend
+    reader.readAsDataURL(file); // Devuelve un string base64 que representa la imagen
+    reader.onload = async function () { 
         const btn = document.getElementById('procesar-btn');
         btn.textContent = '⏳ Procesando...';
         btn.disabled = true;
 
         try {
-            const resultado = await procesarTicket(reader.result);
+            const resultado = await procesarTicket(reader.result); // Llamada al backend para procesar la imagen con IA
 
             if (resultado.comercio) {
                 document.getElementById('comercio').value = resultado.comercio;
 
                 //Categorización automática por comercio
-                const categoriaDetectada = categorizarPorComercio(resultado.comercio);
-                if (categoriaDetectada && !resultado.categoria) {
+                const categoriaDetectada = categorizarPorComercio(resultado.comercio); // Intentar categorizar automáticamente por comercio
+                if (categoriaDetectada && !resultado.categoria) { // Si la IA no detectó categoría, usar la detectada por comercio
                     const select = document.getElementById('categoria');
                     const opcion = Array.from(select.options).find(o => o.value === categoriaDetectada);
                     if (opcion) {
@@ -65,7 +65,7 @@ document.getElementById('procesar-btn').addEventListener('click', function () {
                 if (opcion) select.value = resultado.categoria;
             }
 
-            // Punto 13 — Mostrar mensaje de revisión
+            //Mensaje de revisión
             mostrarToast('✅ Revisá y corregí los datos antes de guardar');
 
         } catch (error) {
@@ -78,9 +78,10 @@ document.getElementById('procesar-btn').addEventListener('click', function () {
 });
 
 // Categorizar automáticamente cuando el usuario escribe el comercio a mano
+// blur event: cuando el usuario sale del input de comercio, intentar categorizar automáticamente si no hay categoría seleccionada
 document.getElementById('comercio').addEventListener('blur', function () {
     const select = document.getElementById('categoria');
-    if (select.value) return; // ya tiene categoría seleccionada, no pisar
+    if (select.value) return;
     const cat = categorizarPorComercio(this.value);
     if (cat) {
         const opcion = Array.from(select.options).find(o => o.value === cat);
@@ -98,8 +99,8 @@ const preview = document.getElementById('preview-img');
 
 dropzone.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', () => mostrarPreview(fileInput.files[0]));
-dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
-dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); }); // Agregar clase CSS para resaltar la zona de drop cuando se arrastra un archivo sobre ella
+dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover')); // Quitar clase CSS cuando se sale de la zona de drop
 dropzone.addEventListener('drop', e => {
     e.preventDefault(); dropzone.classList.remove('dragover');
     if (e.dataTransfer.files[0]) mostrarPreview(e.dataTransfer.files[0]);
@@ -131,7 +132,7 @@ if (multiInput) {
         const items = cola.querySelectorAll('.cg-queue-item');
         for (let i = 0; i < archivos.length; i++) {
             const statusEl = items[i].querySelector('.cg-queue-status');
-            statusEl.textContent = '⏳ Procesando...';
+            statusEl.textContent = '⏳ Procesando...'; 
             statusEl.className = 'cg-queue-status wait';
 
             try {
@@ -162,12 +163,13 @@ if (multiInput) {
     });
 }
 
+// Maneja la lectura de archivos asincrónica mediante promesas.
 function leerComoBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
+        reader.onload = () => resolve(reader.result); // Devuelve el resultado en base64 cuando la lectura se completa
         reader.onerror = reject;
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // Inicia la lectura del archivo como base64
     });
 }
 

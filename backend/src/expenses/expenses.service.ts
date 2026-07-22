@@ -3,35 +3,36 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Expense } from './expense.entity';
 
-//Con el decorador @Injectable() le decimos a Nest que esta clase es un servicio,
-// y que puede ser inyectada en otros lugares de la aplicación, como en el controlador de expenses
 @Injectable()
 export class ExpensesService {
   constructor(
-    //Con el decorador @InjectRepository(Expense) le decimos a Nest que queremos inyectar el repositorio de Expense,
-    // esto nos permite hacer consultas a la base de datos para obtener, crear, actualizar o eliminar gastos
+    //Con el decorador @InjectRepository(Expense) NestJS identifica la posible inyeccion de dependencias 
+    // del repositorio, permitiendo hacer consultas a la base de datos para obtener, crear, actualizar o eliminar gastos
     @InjectRepository(Expense)
     private expensesRepository: Repository<Expense>,
   ) { }
 
-
-  async create(expenseData: Partial<Expense>): Promise<Expense> {
+  // Usa una promesa para manejar la creación de un nuevo gasto en la base de datos, retornando el gasto creado.
+  // Partial porque no se requiere que todos los campos de Expense estén presentes, solo los necesarios para crear un nuevo gasto.
+  async create(expenseData: Partial<Expense>): Promise<Expense> { 
     const expense = this.expensesRepository.create(expenseData);
     return this.expensesRepository.save(expense);
   }
 
-  // Obtener todos los gastos de un usuario específico con paginado
+  // Retorna gastos y total de un usuario en particular con paginacion
+  //Equivalencia SQL: SELECT * FROM expenses WHERE userId = ? ORDER BY fecha DESC LIMIT ? OFFSET ?
   async findByUser(userId: number, page: number = 1, limit: number = 15): Promise<{ data: Expense[], total: number }> {
     const [data, total] = await this.expensesRepository.findAndCount({
       where: { user: { id: userId } as any },
       order: { fecha: 'DESC' },
-      skip: (page - 1) * limit,
+      skip: (page - 1) * limit, // Calcular el número de registros a omitir según la página y el límite
       take: limit,
     })
     return { data, total }
   }
 
   // Obtener todos los gastos (para el asesor)
+  //Equivalencia SQL: SELECT * FROM expenses ORDER BY fecha DESC LIMIT ? OFFSET ?
   async findAll(page: number = 1, limit: number = 15): Promise<{ data: Expense[], total: number }> {
     const [data, total] = await this.expensesRepository.findAndCount({
       order: { fecha: 'DESC' },
@@ -42,14 +43,19 @@ export class ExpensesService {
     return { data, total }
   }
 
+  // Obtener reporte de gastos por categorías
+  //Equivalencia SQL: SELECT categoria, SUM(monto) as total FROM expenses WHERE userId = ? GROUP BY categoria
   async getReportesCategorias(userId: number) {
-    const expenses = await this.expensesRepository.find({
+    const expenses = await this.expensesRepository.find({ //Equivalencia SQL: SELECT * FROM expenses WHERE userId = ?
       where: { user: { id: userId } as any }
     })
 
-    const agrupado: { [key: string]: number } = {}
+    //Por cada gasto, creamos un objeto agrupado donde las claves son las categorias y los valores son la suma de los montos de cada categoria. 
+    // Se inicializa como un objeto vacío.
+    const agrupado: { [key: string]: number } = {} //Objeto de clave String y valor Number, para almacenar la suma de los montos por categoria
     expenses.forEach(e => {
-      agrupado[e.categoria] = (agrupado[e.categoria] || 0) + Number(e.monto)
+      agrupado[e.categoria] = (agrupado[e.categoria] || 0) + Number(e.monto) //Equivalente a categoria["Comida"] = categoria["Comida"] + 1
+      //Equivalencia SQL: SELECT categoria, SUM(monto) as total FROM expenses WHERE userId = ? GROUP BY categoria
     })
 
     return {
@@ -58,13 +64,17 @@ export class ExpensesService {
     }
   }
 
+  // Obtener reporte de gastos por meses
+  //Equivalencia SQL: SELECT DATE_FORMAT(fecha, '%Y-%m') as mes, SUM(monto) as total FROM expenses WHERE userId = ? GROUP BY mes
   async getReportesMeses(userId: number) {
     const expenses = await this.expensesRepository.find({
       where: { user: { id: userId } as any },
       order: { fecha: 'ASC' }
     })
 
-    const agrupado: { [key: string]: number } = {}
+    //Se crea un objeto agrupado donde las claves son los meses y los valores son la suma de los 
+    // montos de cada mes. Se inicializa como un objeto vacío.
+    const agrupado: { [key: string]: number } = {} //Objeto de clave String y valor Number, para almacenar la suma de los montos por mes
     expenses.forEach(e => {
       const fecha = new Date(e.fecha)
       const clave = `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}`

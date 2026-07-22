@@ -161,7 +161,8 @@ function categorizarPorComercio(comercio) {
         { categoria: 'Servicios',    palabras: ['edesur', 'edenor', 'metrogas', 'aysa', 'telecom', 'personal', 'claro', 'movistar', 'fibertel', 'internet', 'cable'] },
     ];
     for (const regla of reglas) {
-        if (regla.palabras.some(p => nombre.includes(p))) {
+      // Si alguna palabra de la regla está incluida en el nombre del comercio, se devuelve la categoría correspondiente
+        if (regla.palabras.some(p => nombre.includes(p))) { // some() devuelve true si al menos un elemento del array cumple la condición
             return regla.categoria;
         }
     }

@@ -9,9 +9,9 @@ import { ProcessTicketDto } from './dto/ticket.dto';
 export class TicketsController {
     constructor(private ticketsService: TicketsService) {}
 
+    // Llamada al servicio para procesar el ticket luego de validar la imagen mediante el DTO ProcessTicketDto
     @Post('upload')
     async procesarTicket(@Body() processTicketDto: ProcessTicketDto) {
-        //return this.ticketsService.procesarTicket(processTicketDto.image, processTicketDto.mimeType)
-        return this.ticketsService.procesarTicket(processTicketDto.image)
+        return this.ticketsService.procesarTicket(processTicketDto.image) 
     }
 }

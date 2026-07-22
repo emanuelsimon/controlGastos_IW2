@@ -60,11 +60,12 @@ function generarRecomendacionesAutomaticas(gastos) {
     let totalGeneral = 0;
 
     gastos.forEach(g => {
-        totales[g.categoria] = (totales[g.categoria] || 0) + Number(g.monto);
+        totales[g.categoria] = (totales[g.categoria] || 0) + Number(g.monto);// Sumar el monto del gasto a la categoría correspondiente
         totalGeneral += Number(g.monto);
     });
 
-    const pct = cat => totales[cat] ? (totales[cat] / totalGeneral * 100) : 0;
+    // Función para calcular el porcentaje de gasto por categoría
+    const pct = cat => totales[cat] ? (totales[cat] / totalGeneral * 100) : 0; 
 
     if (pct('Ocio') > 30) {
         recs.push({ icono: '🎭', texto: `Estás gastando el ${pct('Ocio').toFixed(0)}% de tu dinero en ocio. Considerá reducirlo al 20% para mejorar tu ahorro.` });
@@ -83,9 +84,9 @@ function generarRecomendacionesAutomaticas(gastos) {
 
     // Promedio mensual
     const meses = {};
-    gastos.forEach(g => {
+    gastos.forEach(g => { 
         const f = new Date(g.fecha);
-        const k = `${f.getFullYear()}-${f.getMonth()}`;
+        const k = `${f.getFullYear()}-${f.getMonth()}`; //Obtiene el año y mes del gasto para agruparlos
         meses[k] = (meses[k] || 0) + Number(g.monto);
     });
     const promedioMensual = Object.values(meses).length
