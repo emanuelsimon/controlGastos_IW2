@@ -13,8 +13,6 @@ export class LoginDto {
 }
 
 // DTO para el registro, son los datos que se esperan recibir. 
-// Aqui se definen las validaciones para los campos nombre, apellido, dni, email, 
-// password y rol que se reciben en el registro.
 // Llevan el signo "!" para indicar que son campos obligatorios y no pueden ser nulos
 export class RegisterDto {
   @IsString()

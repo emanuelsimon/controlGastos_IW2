@@ -37,8 +37,7 @@ export class AuthService {
       rol,
     });
 
-    } catch (error: any) {
-      // `error` may be unknown, narrow to `any` to access DB error properties
+    } catch (error: any) { 
       if (error && error.code === '23505') { // Código de error de violación de restricción única en PostgreSQL
         if (error.detail?.includes('dni')) {
             throw new ConflictException('El DNI ya está registrado');
@@ -67,7 +66,7 @@ export class AuthService {
 
     const payload = { sub: user.id, email: user.email, rol: user.rol };
     return {
-      token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload), 
       user: {
         id: user.id,
         name: user.nombre,
@@ -75,6 +74,6 @@ export class AuthService {
         email: user.email,
         rol: user.rol,
       }
-    };
+    }; //Porque se retorna el token JWT y la información del usuario suario.
   }
 }

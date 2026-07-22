@@ -16,11 +16,9 @@ export class AuthController {
     return this.authService.register(registerDto);
   }
 
+  //Devuelve el token JWT y la información del usuario (nombre, email y rol)
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    return this.authService.login(loginDto.email, loginDto.password);
-    //Devolvemos el token JWT y la información del usuario (nombre, email y rol) 
-    //para que el frontend pueda usarla para mostrar la información del usuario y 
-    //controlar el acceso a las rutas protegidas según el rol del usuario.
+    return this.authService.login(loginDto.email, loginDto.password);  
   }
 }
